@@ -10,6 +10,14 @@ func printAny(_ msg: Any){
     print("\(msg)")
 }
 
+/*func address(o: UnsafeRawPointer) -> Int {
+    return unsafeBitCast(o, to: Int.self)
+}
+
+func addressHeap<T: AnyObject>(o: T) -> Int {
+    return unsafeBitCast(o, to: Int.self)
+}*/
+
 let BOARDER_ROWS = 5
 let BOARDER_COLS = 3
 let BOARD_CELLS = BOARDER_ROWS*BOARDER_COLS

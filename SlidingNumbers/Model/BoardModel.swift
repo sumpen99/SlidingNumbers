@@ -2,43 +2,84 @@
 //  BoardModel.swift
 //  SlidingNumbers
 //
-//  Created by fredrik sundström on 2023-04-02.
+//  Created by fredrik sundström on 2023-04-06.
 //
 
-import Foundation
-
-class BoardModel{
-    static var directions : [Direction] { return Direction.allValues}
-    static var boardCells = [BoardMarker]()
-    static var emptyCellIndex: Int = 0
+import SwiftUI
+class BoardModel: ObservableObject{
+    var directions : [Direction] { return Direction.allValues}
+    var boardMarkers = [BoardMarker]()
+    var emptyCellIndex: Int = 0
+    var randomEmptyCell: Int = 0
+   
+    @Published var resetBoardCellLocation : Bool = false
+    @Published var refresh : Bool = false
     
-    static func isMoveable(_ index: Int)->Direction?{
+    deinit{
+        printAny("deinit boardmodel")
+    }
+    
+    func getNewBoardCell(index:Int,cellValue:(baseLocation:CGPoint,size: (width:CGFloat,height:CGFloat))) -> BoardCell{
+        let marker = boardMarkers[index]
+        return BoardCell(index:index,
+                             value:marker.value,
+                  locationAndSize:cellValue,
+                  isBoardCell: !marker.isEmpty){
+            updateCellLocation(index: marker.index, location: cellValue.baseLocation)
+        }
+    }
+    
+    func getMarkers() -> [BoardMarker] {
+        randomCellGenerator()
+        return boardMarkers
+    }
+    
+    func randomCellGenerator(){
+        boardMarkers.removeAll()
+        emptyCellIndex = Int.random(in: 0..<BOARD_CELLS)
+        var boardLayout = Int.getUniqueRandomNumbers(min: 1, max: BOARD_CELLS, count: BOARD_CELLS)
+        let randomEmptyCellValue = boardLayout[emptyCellIndex]
+        for i in 0..<boardLayout.count{
+            if boardLayout[i] > randomEmptyCellValue{
+                boardLayout[i] -= 1
+            }
+        }
+        for i in 0..<BOARD_CELLS{
+            boardMarkers.append(BoardMarker(
+                index: i,
+                value: emptyCellIndex == i ? -1 : boardLayout[i],
+                location: CGPoint(x:0,y:0),
+                isEmpty: emptyCellIndex == i))
+        }
+    }
+  
+    func isMoveable(_ index: Int)->Direction?{
         return searchBoard(index)
     }
     
-    static func validIndex(_ index:Int) -> Bool{
+    func validIndex(_ index:Int) -> Bool{
         return index >= 0 && index < BOARD_CELLS
         
     }
     
-    static func getIndex(row:Int,col:Int) -> Int{
+    func getIndex(row:Int,col:Int) -> Int{
         if !validRowCol(row: row, col: col) { return -1}
         return row*BOARDER_COLS + col
     }
     
-    static func validRowCol(row:Int,col:Int) ->Bool {
+    func validRowCol(row:Int,col:Int) ->Bool {
         return (row >= 0 && row < BOARDER_ROWS) && (col >= 0 && col < BOARDER_COLS)
     }
     
-    static func getRowFromIndex(_ index:Int) -> Int{
+    func getRowFromIndex(_ index:Int) -> Int{
         return index / BOARDER_COLS
     }
     
-    static func getColFromIndex(_ index:Int) -> Int{
+    func getColFromIndex(_ index:Int) -> Int{
         return index % BOARDER_COLS
     }
     
-    static func searchBoard(_ index:Int) -> Direction?{
+    func searchBoard(_ index:Int) -> Direction?{
         for i in 0..<directions.count{
             var row = getRowFromIndex(index)
             var col = getColFromIndex(index)
@@ -47,7 +88,7 @@ class BoardModel{
         return nil
     }
     
-    static func searchDirection(row: inout Int,col: inout Int,dir:Direction) -> Bool{
+    func searchDirection(row: inout Int,col: inout Int,dir:Direction) -> Bool{
         switch dir {
             case .NORTH:
                 row -= 1
@@ -63,33 +104,56 @@ class BoardModel{
         return index == emptyCellIndex
     }
     
-    static func swapWithEmpty(_ index: Int) -> (location:CGPoint,newIndex:Int){
+    func printCurrentBoard(){
+        for cell in boardMarkers{
+            printAny("\(cell.value) \(cell.isEmpty) \(cell.location)")
+        }
+    }
+    
+    func swapWithEmpty(_ index: Int) -> (location:CGPoint,newIndex:Int){
         let oldEmptyCellIndex = emptyCellIndex
-        let emptyCellLocation = boardCells[emptyCellIndex].location
+        let emptyCellLocation = boardMarkers[emptyCellIndex].location
+        //let newCellLocation = boardMarkers[index].location
+        let value = boardMarkers[index].value
+        
+        /*boardCells.modifyElement(atIndex: index){
+            $0.index = oldEmptyCellIndex
+            $0.isBoardCell = true
+            $0.updatePosition(location: emptyCellLocation)
+        }*/
+        
+        //boardCells[index].dummy.printTest()
+        
         emptyCellIndex = index
-        
-        
-        boardCells.modifyElement(atIndex: oldEmptyCellIndex){
+        boardMarkers.modifyElement(atIndex: oldEmptyCellIndex){
+            $0.value = value
             $0.isEmpty = false
         }
         
-        boardCells.modifyElement(atIndex: index){
+        boardMarkers.modifyElement(atIndex: index){
+            $0.value = -1
             $0.isEmpty = true
         }
-   
+        
+        
+        //boardCells[0].changeMe = true
+        //boardCells[0].refresh.toggle()
+        //boardCells[0].updatePosition(location: newCellLocation)
+        /*boardCells.modifyElement(atIndex: 0){
+            $0.isBoardCell = false
+            $0.updatePosition(location: newCellLocation)
+        }*/
         return (location:emptyCellLocation,newIndex:oldEmptyCellIndex)
     }
     
-    static func getEmptyCellLocation() -> CGPoint{
-        return boardCells[emptyCellIndex].location
+    func getEmptyCellLocation() -> CGPoint{
+        return boardMarkers[emptyCellIndex].location
     }
     
-    static func swapIfClosestToEmpty(index:Int,baseLocation:CGPoint,location:CGPoint) -> (location:CGPoint,newIndex:Int){
-        let emptyCellLocation = boardCells[emptyCellIndex].location
+    func swapIfClosestToEmpty(index:Int,baseLocation:CGPoint,location:CGPoint) -> (location:CGPoint,newIndex:Int){
+        let emptyCellLocation = boardMarkers[emptyCellIndex].location
         let d1 = sqrt(pow(emptyCellLocation.x - location.x, 2) + pow(emptyCellLocation.y - location.y, 2) * 1.0)
         let d2 = sqrt(pow(baseLocation.x - location.x, 2) + pow(baseLocation.y - location.y, 2) * 1.0)
-        
-        printAny("\(d1) \(d2)")
         
         if d1 < d2{
             return swapWithEmpty(index)
@@ -98,19 +162,8 @@ class BoardModel{
         return (location:baseLocation,newIndex:index)
     }
     
-    static func addNewBoardMarker(index:Int,location:CGPoint,isEmpty:Bool){
-        if boardCells.count == index + 1{
-            return
-        }
-        else{
-            boardCells.append(BoardMarker(
-                                index: index,
-                                location: location,
-                                isEmpty: isEmpty))
-        }
-        if isEmpty{
-            emptyCellIndex = index
-        }
+    func updateCellLocation(index:Int,location:CGPoint){
+        boardMarkers[index].location = location
     }
     
 }

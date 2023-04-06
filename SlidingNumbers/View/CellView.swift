@@ -1,8 +1,8 @@
 //
-//  Cell.swift
+//  CellView.swift
 //  SlidingNumbers
 //
-//  Created by fredrik sundström on 2023-04-02.
+//  Created by fredrik sundström on 2023-04-05.
 //
 
 import SwiftUI

@@ -13,17 +13,33 @@ struct NavigationView: View{
             BoardView()
                 .tabItem(){
                     Image(systemName:"play.fill")
-                    Text("Play")
+                    Text("New Game")
+                }
+            ViewB()
+                .tabItem(){
+                    Image(systemName: "person.2.fill")
+                    Text("Contacts")
                 }
         }
-        
         .accentColor(.black)
     }
     
-    /*init() {
-        UITabBar.appearance().backgroundColor = UIColor.red
-        UITabBar.appearance().barTintColor = .green
-    }*/
+    init() {
+        //let bgView = UIImageView(image: UIImage(named: "wood1"))
+        //bgView.frame = self.tabBar.bounds
+        //self.tabBar.addSubview(bgView)
+        //self.tabBar.sendSubview(toBack: bgView)
+        //UITabBar.appearance().backgroundColor = UIColor.brown
+        //UITabBar.appearance().barTintColor = .green
+        //UITabBar.appearance().barTintColor = UIColor.clear
+        //UITabBar.appearance().shadowImage = UIImage(named: "wood1.png")
+        //UITabBar.appearance().backgroundImage = UIImage(named:"wood3")
+        //UITabBar.appearance().isTranslucent = false
+        //UITabBar.appearance().backgroundColor = UIColor.clear
+        //UITabBar.appearance().backgroundImage = UIImage(named: "wood2")
+        //UITabBar.appearance().contentMode = .scaleAspectFit
+        
+    }
 }
 
 //struct NavigationView_Previews: PreviewProvider {

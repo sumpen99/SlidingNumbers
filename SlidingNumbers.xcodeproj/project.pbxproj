@@ -16,11 +16,14 @@
 		7D21919129D83C24007FEEA0 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21919029D83C24007FEEA0 /* NavigationView.swift */; };
 		7D21919629D83D77007FEEA0 /* AppGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21919529D83D77007FEEA0 /* AppGlobal.swift */; };
 		7D21919E29D85A20007FEEA0 /* BoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21919D29D85A20007FEEA0 /* BoardCell.swift */; };
-		7D2191A129D976B7007FEEA0 /* BoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191A029D976B7007FEEA0 /* BoardModel.swift */; };
 		7D2191A329D985CF007FEEA0 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191A229D985CF007FEEA0 /* BoardView.swift */; };
-		7D2191A729D9B8A4007FEEA0 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191A629D9B8A4007FEEA0 /* Cell.swift */; };
 		7D2191A929DB4491007FEEA0 /* BoardMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191A829DB4491007FEEA0 /* BoardMarker.swift */; };
 		7D2191AC29DC69B0007FEEA0 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191AB29DC69B0007FEEA0 /* Direction.swift */; };
+		7D2191B129DC8FE2007FEEA0 /* AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191B029DC8FE2007FEEA0 /* AppExtensions.swift */; };
+		7D2191B329DDB85D007FEEA0 /* ViewB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191B229DDB85D007FEEA0 /* ViewB.swift */; };
+		7D2191B529DE0C8C007FEEA0 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191B429DE0C8C007FEEA0 /* CellView.swift */; };
+		7D2191B829DE1811007FEEA0 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191B729DE1811007FEEA0 /* Dummy.swift */; };
+		7D2191BE29DF1CB3007FEEA0 /* BoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191BD29DF1CB3007FEEA0 /* BoardModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,11 +56,14 @@
 		7D21919029D83C24007FEEA0 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		7D21919529D83D77007FEEA0 /* AppGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGlobal.swift; sourceTree = "<group>"; };
 		7D21919D29D85A20007FEEA0 /* BoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCell.swift; sourceTree = "<group>"; };
-		7D2191A029D976B7007FEEA0 /* BoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardModel.swift; sourceTree = "<group>"; };
 		7D2191A229D985CF007FEEA0 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
-		7D2191A629D9B8A4007FEEA0 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		7D2191A829DB4491007FEEA0 /* BoardMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMarker.swift; sourceTree = "<group>"; };
 		7D2191AB29DC69B0007FEEA0 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		7D2191B029DC8FE2007FEEA0 /* AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExtensions.swift; sourceTree = "<group>"; };
+		7D2191B229DDB85D007FEEA0 /* ViewB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewB.swift; sourceTree = "<group>"; };
+		7D2191B429DE0C8C007FEEA0 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		7D2191B729DE1811007FEEA0 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
+		7D2191BD29DF1CB3007FEEA0 /* BoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +114,8 @@
 		7D21916429D839D4007FEEA0 /* SlidingNumbers */ = {
 			isa = PBXGroup;
 			children = (
+				7D2191B629DE1801007FEEA0 /* Class */,
+				7D2191AF29DC8FCE007FEEA0 /* Extensions */,
 				7D2191AA29DC699E007FEEA0 /* Enum */,
 				7D21919F29D976A7007FEEA0 /* Model */,
 				7D21919429D83D63007FEEA0 /* Global */,
@@ -150,8 +158,9 @@
 				7D21919029D83C24007FEEA0 /* NavigationView.swift */,
 				7D21919D29D85A20007FEEA0 /* BoardCell.swift */,
 				7D2191A229D985CF007FEEA0 /* BoardView.swift */,
-				7D2191A629D9B8A4007FEEA0 /* Cell.swift */,
 				7D2191A829DB4491007FEEA0 /* BoardMarker.swift */,
+				7D2191B229DDB85D007FEEA0 /* ViewB.swift */,
+				7D2191B429DE0C8C007FEEA0 /* CellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -167,7 +176,7 @@
 		7D21919F29D976A7007FEEA0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7D2191A029D976B7007FEEA0 /* BoardModel.swift */,
+				7D2191BD29DF1CB3007FEEA0 /* BoardModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -178,6 +187,22 @@
 				7D2191AB29DC69B0007FEEA0 /* Direction.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		7D2191AF29DC8FCE007FEEA0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7D2191B029DC8FE2007FEEA0 /* AppExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7D2191B629DE1801007FEEA0 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				7D2191B729DE1811007FEEA0 /* Dummy.swift */,
+			);
+			path = Class;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,11 +338,14 @@
 				7D2191A329D985CF007FEEA0 /* BoardView.swift in Sources */,
 				7D21919129D83C24007FEEA0 /* NavigationView.swift in Sources */,
 				7D21916629D839D4007FEEA0 /* SlidingNumbersApp.swift in Sources */,
-				7D2191A129D976B7007FEEA0 /* BoardModel.swift in Sources */,
-				7D2191A729D9B8A4007FEEA0 /* Cell.swift in Sources */,
+				7D2191B129DC8FE2007FEEA0 /* AppExtensions.swift in Sources */,
+				7D2191B329DDB85D007FEEA0 /* ViewB.swift in Sources */,
 				7D21919E29D85A20007FEEA0 /* BoardCell.swift in Sources */,
+				7D2191B529DE0C8C007FEEA0 /* CellView.swift in Sources */,
 				7D2191A929DB4491007FEEA0 /* BoardMarker.swift in Sources */,
 				7D21919629D83D77007FEEA0 /* AppGlobal.swift in Sources */,
+				7D2191B829DE1811007FEEA0 /* Dummy.swift in Sources */,
+				7D2191BE29DF1CB3007FEEA0 /* BoardModel.swift in Sources */,
 				7D2191AC29DC69B0007FEEA0 /* Direction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

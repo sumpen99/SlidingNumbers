@@ -9,17 +9,14 @@ import SwiftUI
 
 struct BoardCell:CellView,Identifiable{
     var isBoardCell: Bool
-    let name: String
-    var id: String { name }
+    var name: String
+    var id: Int
     let size: (width:CGFloat,height:CGFloat)
-    //let cellSpace: (width:CGFloat,height:CGFloat)
-    var position: (x:Int,y:Int)
-    let boarderSize: CGFloat
-    var zBase:CGFloat = 0.0
-  
+    @EnvironmentObject var boardModel:BoardModel
+    let dummy = Dummy()
     @State var index: Int
-    @State var isHeld:Bool = false
     @State private var location: CGPoint
+    private var firstLocation: CGPoint
     @State private var baseLocation: CGPoint
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
@@ -33,6 +30,11 @@ struct BoardCell:CellView,Identifiable{
         return self.baseLocation
     }
     
+    func updatePosition(location:CGPoint){
+        self.location = location
+        self.baseLocation = location
+    }
+    
     func shakeAndStirLocation(_ value:DragGesture.Value) -> CGPoint{
         var newLocation = baseLocation
         newLocation.x += min(0.5,max(-0.5,value.translation.width))
@@ -43,27 +45,26 @@ struct BoardCell:CellView,Identifiable{
     var simpleDrag: some Gesture {
         DragGesture()
             .onEnded {_ in 
-                isHeld = false
-                guard let dir = BoardModel.isMoveable(self.index) else {
+                guard let dir = boardModel.isMoveable(self.index) else {
                     location = baseLocation
                     return
                 }
-                let newValues = BoardModel.swapIfClosestToEmpty(
+                let newValues = boardModel.swapIfClosestToEmpty(
                     index:self.index,
                     baseLocation: baseLocation,
                     location: self.location)
                 location = newValues.location
-                baseLocation = location
+                baseLocation = newValues.location
                 index = newValues.newIndex
             }
             .onChanged { value in
-                isHeld = true
-                guard let dir = BoardModel.isMoveable(self.index) else {
+                //isHeld = true
+                guard let dir = boardModel.isMoveable(self.index) else {
                     self.location = shakeAndStirLocation(value)
                     return
                 }
                 var newLocation = startLocation ?? location
-                let emptyCell = BoardModel.getEmptyCellLocation()
+                let emptyCell = boardModel.getEmptyCellLocation()
                 switch dir {
                     case .NORTH:
                         if value.translation.height > 0 {
@@ -112,7 +113,7 @@ struct BoardCell:CellView,Identifiable{
     var fingerDrag: some Gesture {
         DragGesture(minimumDistance: 0)
             .updating($fingerLocation) { (value, fingerLocation, transaction) in
-                guard let dir = BoardModel.isMoveable(self.index) else {
+                guard let dir = boardModel.isMoveable(self.index) else {
                     return 
                 }
                 fingerLocation = value.location
@@ -123,54 +124,52 @@ struct BoardCell:CellView,Identifiable{
         Text(name)
             .foregroundColor(Color.white)
             .fixedSize(horizontal: false, vertical: true)
-            //.frame(minWidth: size.width,maxWidth: size.width, alignment: .center)
             .font(
                 .custom(
                 "AmericanTypewriter",
                 fixedSize: 34)
                 .weight(.semibold))
-            //.multilineTextAlignment(.center)
-            //.position(x:posX,y:posY)
             .frame(width:size.width, height: size.height)
             .background(Rectangle().fill(ImagePaint(image: Image("wood1"), scale: 0.2)).shadow(radius: 0))
-            //.background(Image("wood3"))
             .position(location)
-            .zIndex(isHeld ? 100 : 0)
             .gesture(
-                //simpleDrag.simultaneously(with: fingerDrag)
                 simpleDrag
             )
+            .onChange(of:boardModel.resetBoardCellLocation){ value in
+                location = firstLocation
+                baseLocation = firstLocation
+                
+                // on change get new location for empty cell
+            }
+            
     }
     
     var emptyCell: some View{
+        //AnyView(EmptyView())
         Rectangle()
             .fill(.clear)
             .frame(width:size.width, height: size.height)
             .position(location)
+            .onChange(of:boardModel.resetBoardCellLocation){ value in
+                location = firstLocation
+                baseLocation = firstLocation
+            }
     }
     
     init(index:Int,
-         position:(x:Int,y:Int),
-         boardWidth:CGFloat,
-         boardHeight:CGFloat,
-         isBoardCell:Bool){
-        self.index = index
-        self.name = "\(index+1)"
-        let cellSpace = BOARDER_CELL_SPACE
-        let boarderSize = BOARDER_SIZE
-        self.boarderSize = boarderSize
-        let width = (boardWidth - boarderSize*2 - (cellSpace.width*CGFloat(BOARDER_COLS) + 1)) / CGFloat(BOARDER_COLS)
-        let height = (boardHeight - boarderSize*2 - (cellSpace.height*CGFloat(BOARDER_ROWS) + 1)) / CGFloat(BOARDER_ROWS)
-        let baseX = width/2 + boarderSize + (cellSpace.width * CGFloat(position.x)) + 1
-        let baseY = height/2 + boarderSize + (cellSpace.height * CGFloat(position.y)) + 1
-        let baseLocation = CGPoint(x:(baseX + (width*CGFloat(position.x))),
-                                   y:(baseY + (height*CGFloat(position.y))))
-        self.location = baseLocation
-        self.baseLocation = baseLocation
-        self.size = (width:width,height:height)
-        self.position = position
+         value:Int,
+         locationAndSize:(baseLocation:CGPoint,size: (width:CGFloat,height:CGFloat)),
+         isBoardCell:Bool,
+         updateCellLocation: (() -> Void)){
         self.isBoardCell = isBoardCell
-        BoardModel.addNewBoardMarker(index: index, location: baseLocation, isEmpty: !isBoardCell)
+        self.firstLocation = locationAndSize.baseLocation
+        self.location = locationAndSize.baseLocation
+        self.baseLocation = locationAndSize.baseLocation
+        self.size = locationAndSize.size
+        self.index = index
+        self.name = "\(value)"
+        self.id = index
+        updateCellLocation()
     }
-   
+    
 }
