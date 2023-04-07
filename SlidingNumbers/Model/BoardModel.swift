@@ -12,22 +12,13 @@ class BoardModel: ObservableObject{
     var emptyCellIndex: Int = 0
     var randomEmptyCell: Int = 0
     var newEmptyCellLocation: CGPoint = CGPoint(x:0,y:0)
-    @Published var resetBoardCellLocation : Bool = false
-    
-    func getNewBoardCell(index:Int,cellValue:(baseLocation:CGPoint,size: (width:CGFloat,height:CGFloat))) -> BoardCell{
-        boardMarkers[index].location = cellValue.baseLocation
-        let marker = boardMarkers[index]
-        return BoardCell(index:index,
-                         value:marker.value,
-                         locationAndSize:cellValue,
-                         isBoardCell: !marker.isEmpty)
-    }
+    @Published var regenerateBoard : Bool = false
     
     func getMarkers() -> [BoardMarker] {
         randomCellGenerator()
         return boardMarkers
     }
-    
+ 
     func randomCellGenerator(){
         boardMarkers.removeAll()
         emptyCellIndex = Int.random(in: 0..<BOARD_CELLS)

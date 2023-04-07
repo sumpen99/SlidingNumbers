@@ -8,11 +8,52 @@
 import SwiftUI
 
 struct NavigationView: View{
+    
+    @State private var showingSheet = false
     var body: some View {
+        Button("Play 3X3") {
+            BOARDER_ROWS = 3
+            showingSheet.toggle()
+        }
+        Button("Play 4X3") {
+            BOARDER_ROWS = 4
+            showingSheet.toggle()
+        }
+        Button("Play 5X3") {
+            BOARDER_ROWS = 5
+            showingSheet.toggle()
+        }
+        .fullScreenCover(isPresented: $showingSheet, content: BoardView.init)
+    }
+    /*var body: some View {
+       TabView{
+           BoardView()
+               .tabItem(){
+                   Image(systemName:"house")
+                   //Text("SlidingNumbers")
+               }
+           
+       }
+       .accentColor(.black)
+   }*/
+    
+}
+    /*
+     var body: some View {
         TabView{
             BoardView()
                 .tabItem(){
                     Image(systemName:"house")
+                    //Text("SlidingNumbers")
+                }
+            BoardView()
+                .tabItem(){
+                    Image(systemName:"person")
+                    //Text("SlidingNumbers")
+                }
+            BoardView()
+                .tabItem(){
+                    Image(systemName:"contact")
                     //Text("SlidingNumbers")
                 }
             /*ViewB()
@@ -48,7 +89,7 @@ struct NavigationView: View{
     //}
 //}
 
-/*
+
  TabView{
      BoardView2()
          .tabItem(){
@@ -84,4 +125,4 @@ struct NavigationView: View{
      }
  }
  
- */
+*/

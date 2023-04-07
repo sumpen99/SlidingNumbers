@@ -7,17 +7,14 @@
 
 import SwiftUI
 
-struct BoardCell:CellView,Identifiable{
+struct BoardCell:CellView{
+    @EnvironmentObject var boardModel:BoardModel
     var isBoardCell: Bool
     var name: String
-    var id: Int
     let size: (width:CGFloat,height:CGFloat)
-    @EnvironmentObject var boardModel:BoardModel
     let dummy = Dummy()
     @State var index: Int
     @State private var location: CGPoint
-    private var firstLocation: CGPoint
-    private var firstIndex: Int
     @State private var baseLocation: CGPoint
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
@@ -135,9 +132,9 @@ struct BoardCell:CellView,Identifiable{
             .gesture(
                 simpleDrag
             )
-            .onChange(of:boardModel.resetBoardCellLocation){ value in
+            /*.onChange(of:boardModel.resetBoardCellLocation){ value in
                 resetBoardCell()
-            }
+            }*/
     }
     
     var emptyCell: some View{
@@ -145,30 +142,21 @@ struct BoardCell:CellView,Identifiable{
             .fill(.clear)
             .frame(width:size.width, height: size.height)
             .position(location)
-            .onChange(of:boardModel.resetBoardCellLocation){ value in
+            /*.onChange(of:boardModel.resetBoardCellLocation){ value in
                 resetBoardCell()
-            }
+            }*/
     }
-    
-    func resetBoardCell(){
-        location = firstLocation
-        baseLocation = firstLocation
-        index = firstIndex
-    }
-    
+  
     init(index:Int,
          value:Int,
          locationAndSize:(baseLocation:CGPoint,size: (width:CGFloat,height:CGFloat)),
          isBoardCell:Bool){
         self.isBoardCell = isBoardCell
-        self.firstLocation = locationAndSize.baseLocation
         self.location = locationAndSize.baseLocation
         self.baseLocation = locationAndSize.baseLocation
         self.size = locationAndSize.size
         self.index = index
         self.name = "\(value)"
-        self.id = index
-        self.firstIndex = index
     }
     
 }

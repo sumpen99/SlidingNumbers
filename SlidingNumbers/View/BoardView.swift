@@ -14,7 +14,20 @@ struct BoardView: View{
     @StateObject var boardModel = BoardModel()
     
     func reload(){
-        boardModel.resetBoardCellLocation.toggle()
+        boardModel.regenerateBoard.toggle()
+    }
+    
+    func navigateBack(){
+        dismiss()
+    }
+    
+    func getNewBoardCell(index:Int,cellValue:(baseLocation:CGPoint,size: (width:CGFloat,height:CGFloat))) -> BoardCell{
+        boardModel.boardMarkers[index].location = cellValue.baseLocation
+        let marker = boardModel.boardMarkers[index]
+        return BoardCell(index:index,
+                         value:marker.value,
+                         locationAndSize:cellValue,
+                         isBoardCell: !marker.isEmpty)
     }
     
     func getBaseLocation(size:CGSize,position:(x:Int,y:Int)) -> (baseLocation:CGPoint,size: (width:CGFloat,height:CGFloat)){
@@ -31,9 +44,21 @@ struct BoardView: View{
     
     var body: some View{
         VStack{
-            Button(action: reload, label: {
-                Text("Reload Board")
-            })
+            HStack{
+                Button(action: navigateBack, label: {
+                    Text("Go Back")
+                        .font(.subheadline.bold())
+                        
+                })
+                .frame(maxWidth: .infinity, alignment: .leading)
+                Button(action: reload, label: {
+                    Text("Reload Board")
+                        .font(.subheadline.bold())
+                })
+                .frame(maxWidth: .infinity, alignment: .center)
+                Spacer()
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            }
             GeometryReader { geometry in
                 ZStack() {
                     ForEach(boardModel.getMarkers(), id: \.id) { marker in
@@ -41,7 +66,7 @@ struct BoardView: View{
                                                               position:
                                                                 (x:Int(marker.index%BOARDER_COLS),
                                                                  y:Int(marker.index/BOARDER_COLS)))
-                        boardModel.getNewBoardCell(index: marker.index, cellValue: cellValue)
+                        getNewBoardCell(index: marker.index, cellValue: cellValue)
                         .environmentObject(boardModel)
                     }
                 }
@@ -62,7 +87,6 @@ struct BoardView: View{
         .padding(20)
         
     }
-    
     
 }
 

@@ -18,9 +18,9 @@ func addressHeap<T: AnyObject>(o: T) -> Int {
     return unsafeBitCast(o, to: Int.self)
 }*/
 
-let BOARDER_ROWS = 5
+var BOARDER_ROWS = 3
 let BOARDER_COLS = 3
-let BOARD_CELLS = BOARDER_ROWS*BOARDER_COLS
+var BOARD_CELLS: Int { Int(BOARDER_ROWS)*Int(BOARDER_COLS)}
 var BOARDER_SIZE: CGFloat{ return 30.0}
 var BOARDER_CELL_SPACE: (width: CGFloat,height: CGFloat){ return (width:1.0,height:1.0)}
 
