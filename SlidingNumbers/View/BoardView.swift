@@ -12,7 +12,7 @@ struct BoardView: View{
     @Environment(\.dismiss) private var dismiss
     @Environment(\.isPresented) private var isPresented
     @StateObject var boardModel = BoardModel()
-   
+    
     func reload(){
         boardModel.resetBoardCellLocation.toggle()
     }
@@ -32,7 +32,7 @@ struct BoardView: View{
     var body: some View{
         VStack{
             Button(action: reload, label: {
-                Text("NewGame")
+                Text("Reload Board")
             })
             GeometryReader { geometry in
                 ZStack() {

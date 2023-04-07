@@ -25,4 +25,8 @@ class BoardMarker:Identifiable{
         self.location = location
         self.isEmpty = isEmpty
     }
+    
+    func toString() -> String{
+        return "(\(index) \(value))"
+    }
 }

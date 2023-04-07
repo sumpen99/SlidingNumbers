@@ -11,22 +11,16 @@ class BoardModel: ObservableObject{
     var boardMarkers = [BoardMarker]()
     var emptyCellIndex: Int = 0
     var randomEmptyCell: Int = 0
-   
+    var newEmptyCellLocation: CGPoint = CGPoint(x:0,y:0)
     @Published var resetBoardCellLocation : Bool = false
-    @Published var refresh : Bool = false
-    
-    deinit{
-        printAny("deinit boardmodel")
-    }
     
     func getNewBoardCell(index:Int,cellValue:(baseLocation:CGPoint,size: (width:CGFloat,height:CGFloat))) -> BoardCell{
+        boardMarkers[index].location = cellValue.baseLocation
         let marker = boardMarkers[index]
         return BoardCell(index:index,
-                             value:marker.value,
-                  locationAndSize:cellValue,
-                  isBoardCell: !marker.isEmpty){
-            updateCellLocation(index: marker.index, location: cellValue.baseLocation)
-        }
+                         value:marker.value,
+                         locationAndSize:cellValue,
+                         isBoardCell: !marker.isEmpty)
     }
     
     func getMarkers() -> [BoardMarker] {
@@ -105,26 +99,38 @@ class BoardModel: ObservableObject{
     }
     
     func printCurrentBoard(){
-        for cell in boardMarkers{
-            printAny("\(cell.value) \(cell.isEmpty) \(cell.location)")
-        }
+        let c1 = boardMarkers[0]
+        let c2 = boardMarkers[1]
+        let c3 = boardMarkers[2]
+        let c4 = boardMarkers[3]
+        let c5 = boardMarkers[4]
+        let c6 = boardMarkers[5]
+        let c7 = boardMarkers[6]
+        let c8 = boardMarkers[7]
+        let c9 = boardMarkers[8]
+        let c10 = boardMarkers[9]
+        let c11 = boardMarkers[10]
+        let c12 = boardMarkers[11]
+        let c13 = boardMarkers[12]
+        let c14 = boardMarkers[13]
+        let c15 = boardMarkers[14]
+        printAny("###################################")
+        printAny("\(c1.toString()) \(c2.toString()) \(c3.toString())")
+        printAny("\(c4.toString()) \(c5.toString()) \(c6.toString())")
+        printAny("\(c7.toString()) \(c8.toString()) \(c9.toString())")
+        printAny("\(c10.toString()) \(c11.toString()) \(c12.toString())")
+        printAny("\(c13.toString()) \(c14.toString()) \(c15.toString())")
     }
     
     func swapWithEmpty(_ index: Int) -> (location:CGPoint,newIndex:Int){
         let oldEmptyCellIndex = emptyCellIndex
         let emptyCellLocation = boardMarkers[emptyCellIndex].location
-        //let newCellLocation = boardMarkers[index].location
+        newEmptyCellLocation = boardMarkers[index].location
+       
         let value = boardMarkers[index].value
         
-        /*boardCells.modifyElement(atIndex: index){
-            $0.index = oldEmptyCellIndex
-            $0.isBoardCell = true
-            $0.updatePosition(location: emptyCellLocation)
-        }*/
-        
-        //boardCells[index].dummy.printTest()
-        
         emptyCellIndex = index
+        
         boardMarkers.modifyElement(atIndex: oldEmptyCellIndex){
             $0.value = value
             $0.isEmpty = false
@@ -134,18 +140,9 @@ class BoardModel: ObservableObject{
             $0.value = -1
             $0.isEmpty = true
         }
-        
-        
-        //boardCells[0].changeMe = true
-        //boardCells[0].refresh.toggle()
-        //boardCells[0].updatePosition(location: newCellLocation)
-        /*boardCells.modifyElement(atIndex: 0){
-            $0.isBoardCell = false
-            $0.updatePosition(location: newCellLocation)
-        }*/
         return (location:emptyCellLocation,newIndex:oldEmptyCellIndex)
     }
-    
+ 
     func getEmptyCellLocation() -> CGPoint{
         return boardMarkers[emptyCellIndex].location
     }
@@ -160,10 +157,6 @@ class BoardModel: ObservableObject{
         }
         
         return (location:baseLocation,newIndex:index)
-    }
-    
-    func updateCellLocation(index:Int,location:CGPoint){
-        boardMarkers[index].location = location
     }
     
 }

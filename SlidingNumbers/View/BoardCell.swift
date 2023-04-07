@@ -17,6 +17,7 @@ struct BoardCell:CellView,Identifiable{
     @State var index: Int
     @State private var location: CGPoint
     private var firstLocation: CGPoint
+    private var firstIndex: Int
     @State private var baseLocation: CGPoint
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
@@ -58,7 +59,6 @@ struct BoardCell:CellView,Identifiable{
                 index = newValues.newIndex
             }
             .onChanged { value in
-                //isHeld = true
                 guard let dir = boardModel.isMoveable(self.index) else {
                     self.location = shakeAndStirLocation(value)
                     return
@@ -136,31 +136,30 @@ struct BoardCell:CellView,Identifiable{
                 simpleDrag
             )
             .onChange(of:boardModel.resetBoardCellLocation){ value in
-                location = firstLocation
-                baseLocation = firstLocation
-                
-                // on change get new location for empty cell
+                resetBoardCell()
             }
-            
     }
     
     var emptyCell: some View{
-        //AnyView(EmptyView())
         Rectangle()
             .fill(.clear)
             .frame(width:size.width, height: size.height)
             .position(location)
             .onChange(of:boardModel.resetBoardCellLocation){ value in
-                location = firstLocation
-                baseLocation = firstLocation
+                resetBoardCell()
             }
+    }
+    
+    func resetBoardCell(){
+        location = firstLocation
+        baseLocation = firstLocation
+        index = firstIndex
     }
     
     init(index:Int,
          value:Int,
          locationAndSize:(baseLocation:CGPoint,size: (width:CGFloat,height:CGFloat)),
-         isBoardCell:Bool,
-         updateCellLocation: (() -> Void)){
+         isBoardCell:Bool){
         self.isBoardCell = isBoardCell
         self.firstLocation = locationAndSize.baseLocation
         self.location = locationAndSize.baseLocation
@@ -169,7 +168,7 @@ struct BoardCell:CellView,Identifiable{
         self.index = index
         self.name = "\(value)"
         self.id = index
-        updateCellLocation()
+        self.firstIndex = index
     }
     
 }

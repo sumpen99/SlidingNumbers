@@ -12,14 +12,14 @@ struct NavigationView: View{
         TabView{
             BoardView()
                 .tabItem(){
-                    Image(systemName:"play.fill")
-                    Text("New Game")
+                    Image(systemName:"house")
+                    //Text("SlidingNumbers")
                 }
-            ViewB()
+            /*ViewB()
                 .tabItem(){
                     Image(systemName: "person.2.fill")
                     Text("Contacts")
-                }
+                }*/
         }
         .accentColor(.black)
     }
