@@ -114,6 +114,8 @@
 		7D21916429D839D4007FEEA0 /* SlidingNumbers */ = {
 			isa = PBXGroup;
 			children = (
+				7D2191CE29E1F501007FEEA0 /* Cell */,
+				7D2191CD29E1F4DE007FEEA0 /* Markers */,
 				7D2191B629DE1801007FEEA0 /* Class */,
 				7D2191AF29DC8FCE007FEEA0 /* Extensions */,
 				7D2191AA29DC699E007FEEA0 /* Enum */,
@@ -156,11 +158,8 @@
 			isa = PBXGroup;
 			children = (
 				7D21919029D83C24007FEEA0 /* NavigationView.swift */,
-				7D21919D29D85A20007FEEA0 /* BoardCell.swift */,
 				7D2191A229D985CF007FEEA0 /* BoardView.swift */,
-				7D2191A829DB4491007FEEA0 /* BoardMarker.swift */,
 				7D2191B229DDB85D007FEEA0 /* ViewB.swift */,
-				7D2191B429DE0C8C007FEEA0 /* CellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -203,6 +202,23 @@
 				7D2191B729DE1811007FEEA0 /* Dummy.swift */,
 			);
 			path = Class;
+			sourceTree = "<group>";
+		};
+		7D2191CD29E1F4DE007FEEA0 /* Markers */ = {
+			isa = PBXGroup;
+			children = (
+				7D2191A829DB4491007FEEA0 /* BoardMarker.swift */,
+			);
+			path = Markers;
+			sourceTree = "<group>";
+		};
+		7D2191CE29E1F501007FEEA0 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7D2191B429DE0C8C007FEEA0 /* CellView.swift */,
+				7D21919D29D85A20007FEEA0 /* BoardCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -512,8 +528,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -542,8 +557,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

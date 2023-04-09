@@ -6,7 +6,6 @@
 //
 
 class Dummy{
-    
     init(){
         //printAny("init dummy")
     }
@@ -16,6 +15,6 @@ class Dummy{
     }
     
     deinit{
-        //printAny("deinit dummy")
+        printAny("deinit dummy")
     }
 }
