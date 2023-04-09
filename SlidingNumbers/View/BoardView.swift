@@ -42,7 +42,7 @@ struct BoardView: View{
             }
             GeometryReader { geometry in
                 ZStack() {
-                    ForEach(boardModel.getMarkers(size:geometry.size), id: \.id) { marker in
+                    ForEach(boardModel.getMarkers(width:geometry.size.width,height:geometry.size.height), id: \.id) { marker in
                         BoardCell(cellMarker:marker)
                     }
                     

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+
 class BoardModel: ObservableObject{
     @Published var regenerateBoard : Bool = false
     var directions : [Direction] { return Direction.allValues}
@@ -22,9 +23,8 @@ class BoardModel: ObservableObject{
         boardMarkers.removeAll()
     }
     
-    func getMarkers(size:CGSize) -> [BoardMarker] {
-        BOARDER_WIDTH = size.width
-        BOARDER_HEIGHT = size.height
+    func getMarkers(width:CGFloat,height:CGFloat) -> [BoardMarker] {
+        setCellSize(width:width,height:height)
         if boardMarkers.isEmpty { resetBoard() }
         else { updateBoardCells()}
         return boardMarkers
@@ -43,7 +43,7 @@ class BoardModel: ObservableObject{
     func updateBoardCells(){
         for marker in boardMarkers{
             marker.updateID()
-            marker.updateSizeAndLocation()
+            marker.updateLocation()
         }
     }
    

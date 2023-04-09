@@ -24,6 +24,11 @@ struct BoardCell:CellView{
         return newLocation
     }
     
+    func updatePosition(){
+        location = cellMarker.location
+        baseLocation = cellMarker.location
+    }
+    
     var simpleDrag: some Gesture {
         DragGesture()
             .onEnded {_ in
@@ -97,28 +102,24 @@ struct BoardCell:CellView{
                     "AmericanTypewriter",
                     fixedSize: 34)
                 .weight(.semibold))
-            .frame(width:cellMarker.width, height: cellMarker.height)
+            .frame(width:CELL_WIDTH, height: CELL_HEIGHT)
             .background(Rectangle().fill(ImagePaint(image: Image("wood1"), scale: 0.2)).shadow(radius: 0))
             .position(location)
             .gesture(
                 simpleDrag
             )
             .onChange(of:cellMarker.regenerateLocation){ value in
-                let loc = cellMarker.location
-                location = loc
-                baseLocation = loc
+                updatePosition()
             }
     }
     
     var emptyCell: some View{
         Rectangle()
             .fill(.blue)
-            .frame(width:cellMarker.width, height: cellMarker.height)
+            .frame(width:CELL_WIDTH, height: CELL_HEIGHT)
             .position(location)
             .onChange(of:cellMarker.regenerateLocation){ value in
-                let loc = cellMarker.location
-                location = loc
-                baseLocation = loc
+                updatePosition()
             }
     }
     
