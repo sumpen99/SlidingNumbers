@@ -19,7 +19,7 @@ struct BoardView: View{
     }
     
     func navigateBack(){
-        boardModel.clearBoard()
+        //boardModel.clearBoard()
         dismiss()
     }
     

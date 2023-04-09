@@ -7,10 +7,10 @@
 import SwiftUI
 
 class BoardMarker:Identifiable,ObservableObject{
+    @Published var regenerateLocation : Bool = false
     var id = UUID()
     var index: Int
     var name:String
-    @Published var regenerateLocation : Bool = false
     var isEmpty: Bool
     var _location: CGPoint = CGPoint(x:0,y:0)
     var _width: CGFloat = 0.0
@@ -39,8 +39,6 @@ class BoardMarker:Identifiable,ObservableObject{
             _height = newVal
         }
     }
-   
-    var cell:BoardCell? = nil
     
     deinit{
         printAny("deinit boardmarker \(id)")
