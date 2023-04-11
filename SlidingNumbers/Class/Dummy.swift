@@ -6,6 +6,7 @@
 //
 
 class Dummy{
+    var name = ""
     init(){
         //printAny("init dummy")
     }
@@ -15,6 +16,6 @@ class Dummy{
     }
     
     deinit{
-        printAny("deinit dummy")
+        //printAny("deinit dummy name: \(name)")
     }
 }

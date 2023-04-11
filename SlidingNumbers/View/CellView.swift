@@ -11,7 +11,7 @@ protocol CellView: View {
     associatedtype BaseCell: View
     associatedtype EmptyCell: View
     
-    var isBoardCell: Bool { get set }
+    var isBoardCell: Bool { get }
     
     var baseCell: BaseCell { get }
     

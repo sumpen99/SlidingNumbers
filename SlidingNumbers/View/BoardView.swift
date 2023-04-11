@@ -12,6 +12,7 @@ struct BoardView: View{
     @Environment(\.dismiss) private var dismiss
     @Environment(\.isPresented) private var isPresented
     @StateObject var boardModel = BoardModel()
+    @State private var orientation = UIDeviceOrientation.unknown
     
     func reload(){
         boardModel.resetBoard()
@@ -52,18 +53,20 @@ struct BoardView: View{
                        height: geometry.size.height,
                        alignment: .topLeading)
                 .border(ImagePaint(image: Image("wood1"), scale: 0.2), width: BOARDER_SIZE)
+                /*.onRotate { newOrientation in
+                    orientation = newOrientation
+                }*/
                 .onAppear{
-                    printAny("on Appear BoardView \(safeAreaInsets.leading)")
+                    //printAny("on Appear BoardView \(safeAreaInsets.leading)")
                     
                 }
                 .onDisappear{
-                    printAny("on Dissapear BoardView")
+                    //printAny("on Dissapear BoardView")
                     
                 }
             }
         }
         .padding(20)
-        
     }
     
 }

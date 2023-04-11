@@ -33,6 +33,11 @@ class BoardMarker:Identifiable,ObservableObject{
         updateLocation()
     }
     
+    func refresh(){
+        updateID()
+        updateLocation()
+    }
+    
     func updateID(){
         id = UUID()
     }
@@ -40,6 +45,10 @@ class BoardMarker:Identifiable,ObservableObject{
     func updateLocation(){
         let position = (x:Int(index%BOARDER_COLS),y:Int(index/BOARDER_COLS))
         self.location = getCellLocation(position:position)
+    }
+    
+    func printReferenceCount(){
+        printAny("ReferenceCount to -> \(id.uuidString) = \(CFGetRetainCount(self)) isEmptyCell: \(isEmpty)")
     }
    
     func toString() -> String{

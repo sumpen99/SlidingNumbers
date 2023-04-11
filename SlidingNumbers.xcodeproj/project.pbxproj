@@ -24,6 +24,7 @@
 		7D2191B529DE0C8C007FEEA0 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191B429DE0C8C007FEEA0 /* CellView.swift */; };
 		7D2191B829DE1811007FEEA0 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191B729DE1811007FEEA0 /* Dummy.swift */; };
 		7D2191BE29DF1CB3007FEEA0 /* BoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191BD29DF1CB3007FEEA0 /* BoardModel.swift */; };
+		7D2191D429E5BA6B007FEEA0 /* DeviceRotationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191D329E5BA6B007FEEA0 /* DeviceRotationViewModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		7D2191B429DE0C8C007FEEA0 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		7D2191B729DE1811007FEEA0 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
 		7D2191BD29DF1CB3007FEEA0 /* BoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardModel.swift; sourceTree = "<group>"; };
+		7D2191D329E5BA6B007FEEA0 /* DeviceRotationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRotationViewModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,8 +116,6 @@
 		7D21916429D839D4007FEEA0 /* SlidingNumbers */ = {
 			isa = PBXGroup;
 			children = (
-				7D2191CE29E1F501007FEEA0 /* Cell */,
-				7D2191CD29E1F4DE007FEEA0 /* Markers */,
 				7D2191B629DE1801007FEEA0 /* Class */,
 				7D2191AF29DC8FCE007FEEA0 /* Extensions */,
 				7D2191AA29DC699E007FEEA0 /* Enum */,
@@ -157,9 +157,12 @@
 		7D21918F29D83BBC007FEEA0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7D21919D29D85A20007FEEA0 /* BoardCell.swift */,
+				7D2191B429DE0C8C007FEEA0 /* CellView.swift */,
 				7D21919029D83C24007FEEA0 /* NavigationView.swift */,
 				7D2191A229D985CF007FEEA0 /* BoardView.swift */,
 				7D2191B229DDB85D007FEEA0 /* ViewB.swift */,
+				7D2191D329E5BA6B007FEEA0 /* DeviceRotationViewModifier.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -199,26 +202,10 @@
 		7D2191B629DE1801007FEEA0 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				7D2191A829DB4491007FEEA0 /* BoardMarker.swift */,
 				7D2191B729DE1811007FEEA0 /* Dummy.swift */,
 			);
 			path = Class;
-			sourceTree = "<group>";
-		};
-		7D2191CD29E1F4DE007FEEA0 /* Markers */ = {
-			isa = PBXGroup;
-			children = (
-				7D2191A829DB4491007FEEA0 /* BoardMarker.swift */,
-			);
-			path = Markers;
-			sourceTree = "<group>";
-		};
-		7D2191CE29E1F501007FEEA0 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				7D2191B429DE0C8C007FEEA0 /* CellView.swift */,
-				7D21919D29D85A20007FEEA0 /* BoardCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,6 +341,7 @@
 				7D2191A329D985CF007FEEA0 /* BoardView.swift in Sources */,
 				7D21919129D83C24007FEEA0 /* NavigationView.swift in Sources */,
 				7D21916629D839D4007FEEA0 /* SlidingNumbersApp.swift in Sources */,
+				7D2191D429E5BA6B007FEEA0 /* DeviceRotationViewModifier.swift in Sources */,
 				7D2191B129DC8FE2007FEEA0 /* AppExtensions.swift in Sources */,
 				7D2191B329DDB85D007FEEA0 /* ViewB.swift in Sources */,
 				7D21919E29D85A20007FEEA0 /* BoardCell.swift in Sources */,

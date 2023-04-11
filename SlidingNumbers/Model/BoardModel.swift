@@ -12,16 +12,6 @@ class BoardModel: ObservableObject{
     var directions : [Direction] { return Direction.allValues}
     var boardMarkers = [BoardMarker]()
     var emptyCellIndex: Int = 0
-    var boardLayout = [Int]()
-    
-    deinit{
-        printAny("deinit boardmodel")
-    }
-    
-    func clearBoard(){
-        printAny("clear board")
-        boardMarkers.removeAll()
-    }
     
     func getMarkers(width:CGFloat,height:CGFloat) -> [BoardMarker] {
         setCellSize(width:width,height:height)
@@ -30,24 +20,59 @@ class BoardModel: ObservableObject{
         return boardMarkers
     }
     
-    func resetBoard(){
-        var sum = 0
-        emptyCellIndex = Int.random(in: 0..<BOARD_CELLS)
-        randomCellGenerator()
-        if boardMarkers.isEmpty{ addMarkersToBoard(sum:&sum) }
-        else{ refreshMarkersOnBoard(sum:&sum) }
-        if sum == BOARD_CELLS-1 { resetBoard()}
-        boardLayout.removeAll()
-    }
-    
     func updateBoardCells(){
+        printAny("################## START DEVICE ROTATION ##########################")
         for marker in boardMarkers{
-            marker.updateID()
-            marker.updateLocation()
+            
+            // 1. Probably worst
+            //marker.updateID()
+            //marker.updateLocation()
+            
+            // 2. Not Good
+            DispatchQueue.main.async {
+                marker.updateLocation()
+                marker.regenerateLocation.toggle()
+            }
+            
+            // 3. change to firstlocation Make this one work
+            //marker.updateLocation()
+            
         }
     }
+    
+    func resetBoard(){
+        var sum = 0
+        var boardLayout = [Int]()
+        emptyCellIndex = Int.random(in: 0..<BOARD_CELLS)
+        randomCellGenerator(boardLayout:&boardLayout)
+        if boardMarkers.isEmpty{
+            for i in 0..<BOARD_CELLS{
+                if boardLayout[i] == i+1 { sum+=1 }
+                let isEmpty = i == emptyCellIndex
+                let name = isEmpty ? "-1" : "\(boardLayout[i])"
+                boardMarkers.append(BoardMarker(index:i,
+                                                name:name,
+                                                isEmpty: isEmpty))
+            }
+            
+        }
+        else{
+            for i in 0..<BOARD_CELLS{
+                if boardLayout[i] == i+1 { sum+=1 }
+                let isEmpty = i == emptyCellIndex
+                let name = isEmpty ? "-1" : "\(boardLayout[i])"
+                boardMarkers.modifyElement(atIndex: i){
+                    $0.index = i
+                    $0.name = name
+                    $0.isEmpty = isEmpty
+                }
+            }
+            
+        }
+        if sum == BOARD_CELLS-1 { resetBoard()}
+    }
    
-    func randomCellGenerator(){
+    func randomCellGenerator(boardLayout: inout [Int]){
         boardLayout = Int.getUniqueRandomNumbers(min: 1, max: BOARD_CELLS, count: BOARD_CELLS)
         let randomEmptyCellValue = boardLayout[emptyCellIndex]
         for i in 0..<boardLayout.count{
@@ -56,31 +81,6 @@ class BoardModel: ObservableObject{
             }
         }
     }
-    
-    func addMarkersToBoard(sum: inout Int){
-        var sum = 0
-        for i in 0..<BOARD_CELLS{
-            if boardLayout[i] == i+1 { sum+=1 }
-            let isEmpty = i == emptyCellIndex
-            boardMarkers.append(BoardMarker(index:i,
-                                            name:isEmpty ? "-1" : "\(boardLayout[i])",
-                                            isEmpty: isEmpty))
-        }
-        if sum == BOARD_CELLS-1 { randomCellGenerator()}
-    }
-    
-    func refreshMarkersOnBoard(sum: inout Int){
-        for i in 0..<BOARD_CELLS{
-            if boardLayout[i] == i+1 { sum+=1 }
-            let isEmpty = i == emptyCellIndex
-            boardMarkers.modifyElement(atIndex: i){
-                $0.index = i
-                $0.name = isEmpty ? "-1" : "\(boardLayout[i])"
-                $0.isEmpty = isEmpty
-            }
-        }
-    }
-    
     
     func isMoveable(_ index: Int)->Direction?{
         return searchBoard(index)
@@ -137,7 +137,8 @@ class BoardModel: ObservableObject{
         return boardMarkers[emptyCellIndex].location
     }
     
-    func swapIfClosestToEmpty(index:Int,baseLocation:CGPoint,location:CGPoint){
+    func swapIfClosestToEmpty(index:Int,location:CGPoint){
+        let baseLocation = boardMarkers[index].location
         let emptyCellLocation = boardMarkers[emptyCellIndex].location
         let d1 = sqrt(pow(emptyCellLocation.x - location.x, 2) + pow(emptyCellLocation.y - location.y, 2) * 1.0)
         let d2 = sqrt(pow(baseLocation.x - location.x, 2) + pow(baseLocation.y - location.y, 2) * 1.0)
@@ -148,7 +149,6 @@ class BoardModel: ObservableObject{
         }
         
         boardMarkers.modifyElement(atIndex: index){
-            $0.location = baseLocation
             $0.regenerateLocation.toggle()
         }
     }
@@ -195,6 +195,10 @@ class BoardModel: ObservableObject{
         printAny("\(c7.toString()) \(c8.toString()) \(c9.toString())")
         //printAny("\(c10.toString()) \(c11.toString()) \(c12.toString())")
         //printAny("\(c13.toString()) \(c14.toString()) \(c15.toString())")
+    }
+    
+    deinit{
+        printAny("deinit boardmodel")
     }
     
 }

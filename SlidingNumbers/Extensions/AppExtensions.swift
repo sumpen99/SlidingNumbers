@@ -8,6 +8,12 @@
 
 import SwiftUI
 
+extension View{
+    func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
+        self.modifier(DeviceRotationViewModifier(action: action))
+    }
+}
+
 extension UITabBarController {
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -61,4 +67,58 @@ extension Range where Bound: FixedWidthInteger {
 
 extension ClosedRange where Bound: FixedWidthInteger {
     var randomElement: Bound { .random(in: self) }
+}
+
+extension Array {
+    mutating func modifyForEach(_ body: (_ index: Index, _ element: inout Element) -> ()) {
+        for index in indices {
+            modifyElement(atIndex: index) { body(index, &$0) }
+        }
+    }
+
+    mutating func modifyElement(atIndex index: Index, _ modifyElement: (_ element: inout Element) -> ()) {
+        var element = self[index]
+        modifyElement(&element)
+        self[index] = element
+    }
+}
+
+extension UIApplication {
+    var keyWindow: UIWindow? {
+        connectedScenes
+            .compactMap {
+                $0 as? UIWindowScene
+            }
+            .flatMap {
+                $0.windows
+            }
+            .first {
+                $0.isKeyWindow
+            }
+    }
+}
+
+private struct SafeAreaInsetsKey:EnvironmentKey {
+    
+    static var defaultValue: EdgeInsets {
+        UIApplication.shared.keyWindow?.safeAreaInsets.swiftUiInsets ?? EdgeInsets()
+    }
+}
+
+extension EnvironmentValues {
+    var safeAreaInsets: EdgeInsets {
+        self[SafeAreaInsetsKey.self]
+    }
+}
+
+private extension UIEdgeInsets {
+    var swiftUiInsets: EdgeInsets {
+        EdgeInsets(top: top, leading: left, bottom: bottom, trailing: right)
+    }
+}
+
+extension UIScreen{
+    static let screenWidth = UIScreen.main.bounds.size.width
+    static let screenHeight = UIScreen.main.bounds.size.height
+    static let screenSize = UIScreen.main.bounds.size
 }
