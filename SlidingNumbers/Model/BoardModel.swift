@@ -41,10 +41,9 @@ class BoardModel: ObservableObject{
             for i in 0..<BOARD_CELLS{
                 if boardLayout[i] == i+1 { sum+=1 }
                 let isBoardCell = i != emptyCellIndex
-                let name = isBoardCell ? "\(boardLayout[i])" : "-1"
+                let name = isBoardCell ? "\(boardLayout[i])" : EMPTY_CELL_IDENTIFIER
                 boardMarkers.append(BoardMarker(index:i,
-                                                name:name,
-                                                isBoardCell: isBoardCell))
+                                                name:name))
             }
             
         }
@@ -52,11 +51,10 @@ class BoardModel: ObservableObject{
             for i in 0..<BOARD_CELLS{
                 if boardLayout[i] == i+1 { sum+=1 }
                 let isBoardCell = i != emptyCellIndex
-                let name = isBoardCell ? "\(boardLayout[i])" : "-1"
+                let name = isBoardCell ? "\(boardLayout[i])" : EMPTY_CELL_IDENTIFIER
                 boardMarkers.modifyElement(atIndex: i){
                     $0.index = i
                     $0.name = name
-                    $0.isBoardCell = isBoardCell
                 }
             }
             
@@ -163,30 +161,6 @@ class BoardModel: ObservableObject{
         
         boardMarkers.swapAt(index, emptyCellIndex)
         emptyCellIndex = index
-    }
-    
-    func printCurrentBoard(){
-        let c1 = boardMarkers[0]
-        let c2 = boardMarkers[1]
-        let c3 = boardMarkers[2]
-        let c4 = boardMarkers[3]
-        let c5 = boardMarkers[4]
-        let c6 = boardMarkers[5]
-        let c7 = boardMarkers[6]
-        let c8 = boardMarkers[7]
-        let c9 = boardMarkers[8]
-        /*let c10 = boardMarkers[9]
-        let c11 = boardMarkers[10]
-        let c12 = boardMarkers[11]
-        let c13 = boardMarkers[12]
-        let c14 = boardMarkers[13]
-        let c15 = boardMarkers[14]*/
-        printAny("###################################")
-        printAny("\(c1.toString()) \(c2.toString()) \(c3.toString())")
-        printAny("\(c4.toString()) \(c5.toString()) \(c6.toString())")
-        printAny("\(c7.toString()) \(c8.toString()) \(c9.toString())")
-        //printAny("\(c10.toString()) \(c11.toString()) \(c12.toString())")
-        //printAny("\(c13.toString()) \(c14.toString()) \(c15.toString())")
     }
     
     deinit{

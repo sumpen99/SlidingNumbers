@@ -13,7 +13,7 @@ struct BoardCell:CellView{
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
     
-    var isBoardCell: Bool { cellMarker.isBoardCell}
+    var isBoardCell: Bool { cellMarker.name != EMPTY_CELL_IDENTIFIER}
     
     func shakeAndBakeLocation(_ value:DragGesture.Value) {
         var newLocation = cellMarker.baseLocation
