@@ -13,10 +13,6 @@ class BoardMarker:Identifiable,ObservableObject{
     var index: Int
     var name:String
     
-    deinit{
-        printAny("deinit boardmarker \(id)")
-    }
-    
     init(index: Int,name:String){
         self.index = index
         self.name = name
@@ -39,5 +35,9 @@ class BoardMarker:Identifiable,ObservableObject{
    
     func toString() -> String{
         return "(\(index) \(name))"
+    }
+    
+    deinit{
+        //printAny("deinit boardmarker \(id)")
     }
 }

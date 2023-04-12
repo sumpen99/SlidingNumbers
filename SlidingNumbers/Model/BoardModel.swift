@@ -21,7 +21,6 @@ class BoardModel: ObservableObject{
     }
     
     func updateBoardCells(){
-        printAny("################## START DEVICE ROTATION ##########################")
         for marker in self.boardMarkers{
             DispatchQueue.main.async {
                 marker.updateLocation()
@@ -164,7 +163,7 @@ class BoardModel: ObservableObject{
     }
     
     deinit{
-        printAny("deinit boardmodel")
+        //printAny("deinit boardmodel")
     }
     
 }
