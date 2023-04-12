@@ -13,8 +13,7 @@ struct BoardCell:CellView{
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
     
-    var dummy = Dummy()
-    var isBoardCell: Bool { !cellMarker.isEmpty}
+    var isBoardCell: Bool { cellMarker.isBoardCell}
     
     func shakeAndBakeLocation(_ value:DragGesture.Value) {
         var newLocation = cellMarker.baseLocation
@@ -101,10 +100,6 @@ struct BoardCell:CellView{
             .gesture(
                 simpleDrag
             )
-            .onDisappear(){
-                printAny("boardcell will disappear")
-                //self.cellMarker.printReferenceCount()
-            }
     }
     
     var emptyCell: some View{
@@ -112,16 +107,6 @@ struct BoardCell:CellView{
             .fill(.blue)
             .frame(width:CELL_WIDTH, height: CELL_HEIGHT)
             .position(cellMarker.location)
-            .onDisappear(){
-                printAny("boardcell will disappear")
-                //self.cellMarker.printReferenceCount()
-            }
-    }
-    
-    init(cellMarker:BoardMarker){
-        self.cellMarker = cellMarker
-        dummy.name = self.cellMarker.id.uuidString
-        printAny("################ INIT BOARDCELL ############################")
     }
     
 }

@@ -12,16 +12,16 @@ class BoardMarker:Identifiable,ObservableObject{
     let id = UUID()
     var index: Int
     var name:String
-    var isEmpty: Bool
+    var isBoardCell: Bool
     
     deinit{
         printAny("deinit boardmarker \(id)")
     }
     
-    init(index: Int,name:String,isEmpty:Bool){
+    init(index: Int,name:String,isBoardCell:Bool){
         self.index = index
         self.name = name
-        self.isEmpty = isEmpty
+        self.isBoardCell = isBoardCell
         updateLocation()
     }
     
@@ -36,7 +36,7 @@ class BoardMarker:Identifiable,ObservableObject{
     }
     
     func printReferenceCount(){
-        printAny("ReferenceCount to -> \(id.uuidString) = \(CFGetRetainCount(self)) isEmptyCell: \(isEmpty)")
+        printAny("ReferenceCount to -> \(id.uuidString) = \(CFGetRetainCount(self)) isEmptyCell: \(isBoardCell)")
     }
    
     func toString() -> String{

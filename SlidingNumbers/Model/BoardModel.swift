@@ -22,19 +22,14 @@ class BoardModel: ObservableObject{
     
     func updateBoardCells(){
         printAny("################## START DEVICE ROTATION ##########################")
-        /*DispatchQueue.main.async {
-            for marker in self.boardMarkers{
-          
-                DispatchQueue.main.async {
-                    marker.updateLocation()
-                }
-                
-            }
-        }*/
-        
         for marker in self.boardMarkers{
-            marker.updateLocation()
+            DispatchQueue.main.async {
+                marker.updateLocation()
+            }
         }
+        /*for marker in self.boardMarkers{
+            marker.updateLocation()
+        }*/
     }
     
     func resetBoard(){
@@ -45,23 +40,23 @@ class BoardModel: ObservableObject{
         if boardMarkers.isEmpty{
             for i in 0..<BOARD_CELLS{
                 if boardLayout[i] == i+1 { sum+=1 }
-                let isEmpty = i == emptyCellIndex
-                let name = isEmpty ? "-1" : "\(boardLayout[i])"
+                let isBoardCell = i != emptyCellIndex
+                let name = isBoardCell ? "\(boardLayout[i])" : "-1"
                 boardMarkers.append(BoardMarker(index:i,
                                                 name:name,
-                                                isEmpty: isEmpty))
+                                                isBoardCell: isBoardCell))
             }
             
         }
         else{
             for i in 0..<BOARD_CELLS{
                 if boardLayout[i] == i+1 { sum+=1 }
-                let isEmpty = i == emptyCellIndex
-                let name = isEmpty ? "-1" : "\(boardLayout[i])"
+                let isBoardCell = i != emptyCellIndex
+                let name = isBoardCell ? "\(boardLayout[i])" : "-1"
                 boardMarkers.modifyElement(atIndex: i){
                     $0.index = i
                     $0.name = name
-                    $0.isEmpty = isEmpty
+                    $0.isBoardCell = isBoardCell
                 }
             }
             
@@ -138,7 +133,6 @@ class BoardModel: ObservableObject{
     func swapIfClosestToEmpty(index:Int){
         let baseLocation = boardMarkers[index].baseLocation
         let location = boardMarkers[index].location
-       
         let emptyCellLocation = boardMarkers[emptyCellIndex].baseLocation
         
         let d1 = sqrt(pow(emptyCellLocation.x - location.x, 2) + pow(emptyCellLocation.y - location.y, 2) * 1.0)
@@ -153,22 +147,21 @@ class BoardModel: ObservableObject{
     }
     
     func swapWithEmpty(_ index: Int){
-        let oldEmptyCellIndex = emptyCellIndex
         let emptyCellLocation = boardMarkers[emptyCellIndex].baseLocation
         let newEmptyCellLocation = boardMarkers[index].baseLocation
-        boardMarkers.modifyElement(atIndex: oldEmptyCellIndex){
+        boardMarkers.modifyElement(atIndex: emptyCellIndex){
             $0.index = index
             $0.location = newEmptyCellLocation
             $0.baseLocation = newEmptyCellLocation
         }
         
         boardMarkers.modifyElement(atIndex: index){
-            $0.index = oldEmptyCellIndex
+            $0.index = emptyCellIndex
             $0.location = emptyCellLocation
             $0.baseLocation = emptyCellLocation
         }
         
-        boardMarkers.swapAt(index, oldEmptyCellIndex)
+        boardMarkers.swapAt(index, emptyCellIndex)
         emptyCellIndex = index
     }
     
