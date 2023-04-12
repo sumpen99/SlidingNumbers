@@ -76,27 +76,6 @@ class BoardModel: ObservableObject{
         return searchBoard(index)
     }
     
-    func validIndex(_ index:Int) -> Bool{
-        return index >= 0 && index < BOARD_CELLS
-    }
-    
-    func getIndex(row:Int,col:Int) -> Int{
-        if !validRowCol(row: row, col: col) { return -1}
-        return row*BOARDER_COLS + col
-    }
-    
-    func validRowCol(row:Int,col:Int) ->Bool {
-        return (row >= 0 && row < BOARDER_ROWS) && (col >= 0 && col < BOARDER_COLS)
-    }
-    
-    func getRowFromIndex(_ index:Int) -> Int{
-        return index / BOARDER_COLS
-    }
-    
-    func getColFromIndex(_ index:Int) -> Int{
-        return index % BOARDER_COLS
-    }
-    
     func searchBoard(_ index:Int) -> Direction?{
         for i in 0..<directions.count{
             var row = getRowFromIndex(index)
@@ -120,11 +99,6 @@ class BoardModel: ObservableObject{
         
         let index = getIndex(row: row, col: col)
         return index == emptyCellIndex
-    }
-    
- 
-    func getEmptyCellLocation() -> CGPoint{
-        return boardMarkers[emptyCellIndex].location
     }
     
     func swapIfClosestToEmpty(index:Int){
@@ -166,4 +140,32 @@ class BoardModel: ObservableObject{
         //printAny("deinit boardmodel")
     }
     
+}
+
+extension BoardModel{
+    
+    func getEmptyCellLocation() -> CGPoint{
+        return boardMarkers[emptyCellIndex].location
+    }
+    
+    func validIndex(_ index:Int) -> Bool{
+        return index >= 0 && index < BOARD_CELLS
+    }
+    
+    func getIndex(row:Int,col:Int) -> Int{
+        if !validRowCol(row: row, col: col) { return -1}
+        return row*BOARDER_COLS + col
+    }
+    
+    func validRowCol(row:Int,col:Int) ->Bool {
+        return (row >= 0 && row < BOARDER_ROWS) && (col >= 0 && col < BOARDER_COLS)
+    }
+    
+    func getRowFromIndex(_ index:Int) -> Int{
+        return index / BOARDER_COLS
+    }
+    
+    func getColFromIndex(_ index:Int) -> Int{
+        return index % BOARDER_COLS
+    }
 }
