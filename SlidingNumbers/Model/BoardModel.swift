@@ -22,21 +22,18 @@ class BoardModel: ObservableObject{
     
     func updateBoardCells(){
         printAny("################## START DEVICE ROTATION ##########################")
-        for marker in boardMarkers{
-            
-            // 1. Probably worst
-            //marker.updateID()
-            //marker.updateLocation()
-            
-            // 2. Not Good
-            DispatchQueue.main.async {
-                marker.updateLocation()
-                marker.regenerateLocation.toggle()
+        /*DispatchQueue.main.async {
+            for marker in self.boardMarkers{
+          
+                DispatchQueue.main.async {
+                    marker.updateLocation()
+                }
+                
             }
-            
-            // 3. change to firstlocation Make this one work
-            //marker.updateLocation()
-            
+        }*/
+        
+        for marker in self.boardMarkers{
+            marker.updateLocation()
         }
     }
     
@@ -69,7 +66,8 @@ class BoardModel: ObservableObject{
             }
             
         }
-        if sum == BOARD_CELLS-1 { resetBoard()}
+        let value = Float(sum) / Float(BOARD_CELLS-1)
+        if value > DIFFICULT_LEVEL { resetBoard() }
     }
    
     func randomCellGenerator(boardLayout: inout [Int]){
@@ -137,9 +135,12 @@ class BoardModel: ObservableObject{
         return boardMarkers[emptyCellIndex].location
     }
     
-    func swapIfClosestToEmpty(index:Int,location:CGPoint){
-        let baseLocation = boardMarkers[index].location
-        let emptyCellLocation = boardMarkers[emptyCellIndex].location
+    func swapIfClosestToEmpty(index:Int){
+        let baseLocation = boardMarkers[index].baseLocation
+        let location = boardMarkers[index].location
+       
+        let emptyCellLocation = boardMarkers[emptyCellIndex].baseLocation
+        
         let d1 = sqrt(pow(emptyCellLocation.x - location.x, 2) + pow(emptyCellLocation.y - location.y, 2) * 1.0)
         let d2 = sqrt(pow(baseLocation.x - location.x, 2) + pow(baseLocation.y - location.y, 2) * 1.0)
         
@@ -147,26 +148,24 @@ class BoardModel: ObservableObject{
             swapWithEmpty(index)
             return
         }
-        
-        boardMarkers.modifyElement(atIndex: index){
-            $0.regenerateLocation.toggle()
-        }
+                
+        boardMarkers[index].resetLocationToBase()
     }
     
     func swapWithEmpty(_ index: Int){
         let oldEmptyCellIndex = emptyCellIndex
-        let emptyCellLocation = boardMarkers[emptyCellIndex].location
-        let newEmptyCellLocation = boardMarkers[index].location
+        let emptyCellLocation = boardMarkers[emptyCellIndex].baseLocation
+        let newEmptyCellLocation = boardMarkers[index].baseLocation
         boardMarkers.modifyElement(atIndex: oldEmptyCellIndex){
             $0.index = index
             $0.location = newEmptyCellLocation
-            $0.regenerateLocation.toggle()
+            $0.baseLocation = newEmptyCellLocation
         }
         
         boardMarkers.modifyElement(atIndex: index){
             $0.index = oldEmptyCellIndex
             $0.location = emptyCellLocation
-            $0.regenerateLocation.toggle()
+            $0.baseLocation = emptyCellLocation
         }
         
         boardMarkers.swapAt(index, oldEmptyCellIndex)

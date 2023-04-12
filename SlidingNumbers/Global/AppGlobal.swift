@@ -18,6 +18,7 @@ func addressHeap<T: AnyObject>(o: T) -> Int {
     return unsafeBitCast(o, to: Int.self)
 }*/
 
+let DIFFICULT_LEVEL: Float = 0.5
 var BOARDER_WIDTH: CGFloat = 0.0
 var BOARDER_HEIGHT: CGFloat = 0.0
 var CELL_WIDTH: CGFloat = 0.0

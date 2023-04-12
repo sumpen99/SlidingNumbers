@@ -9,43 +9,41 @@ import SwiftUI
 struct BoardCell:CellView{
     @EnvironmentObject var boardModel:BoardModel
     @ObservedObject var cellMarker:BoardMarker
-    @State private var location: CGPoint
+  
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
     
-    private var firstLocation: CGPoint
     var dummy = Dummy()
     var isBoardCell: Bool { !cellMarker.isEmpty}
     
-    func shakeAndBakeLocation(_ value:DragGesture.Value) -> CGPoint{
-        var newLocation = cellMarker.location
+    func shakeAndBakeLocation(_ value:DragGesture.Value) {
+        var newLocation = cellMarker.baseLocation
         newLocation.x += min(0.5,max(-0.5,value.translation.width))
         newLocation.y += min(0.5,max(-0.5,value.translation.height))
-        return newLocation
+        cellMarker.location = newLocation
     }
     
     var simpleDrag: some Gesture {
         DragGesture()
             .onEnded {_ in
                 guard boardModel.isMoveable(cellMarker.index) != nil else {
-                    location = cellMarker.location
+                    cellMarker.resetLocationToBase()
                     return
                 }
                 boardModel.swapIfClosestToEmpty(
-                    index:cellMarker.index,
-                    location: self.location)
+                    index:cellMarker.index)
             }
             .onChanged { value in
                 guard let dir = boardModel.isMoveable(cellMarker.index) else {
-                    self.location = shakeAndBakeLocation(value)
+                    shakeAndBakeLocation(value)
                     return
                 }
-                var newLocation = startLocation ?? location
+                var newLocation = startLocation ?? cellMarker.location
                 let emptyCell = boardModel.getEmptyCellLocation()
                 switch dir {
                 case .NORTH:
                     if value.translation.height > 0 {
-                        self.location = shakeAndBakeLocation(value)
+                        shakeAndBakeLocation(value)
                         return
                     }
                     else {
@@ -55,7 +53,7 @@ struct BoardCell:CellView{
                     }
                 case .SOUTH:
                     if value.translation.height < 0 {
-                        self.location = shakeAndBakeLocation(value)
+                        shakeAndBakeLocation(value)
                         return
                     }
                     else {
@@ -64,7 +62,7 @@ struct BoardCell:CellView{
                     }
                 case .WEST:
                     if value.translation.width > 0 {
-                        self.location = shakeAndBakeLocation(value)
+                        shakeAndBakeLocation(value)
                         return
                     }
                     else {
@@ -73,7 +71,7 @@ struct BoardCell:CellView{
                     }
                 case .EAST:
                     if value.translation.width < 0 {
-                        self.location = shakeAndBakeLocation(value)
+                        shakeAndBakeLocation(value)
                         return
                     }
                     else {
@@ -81,9 +79,9 @@ struct BoardCell:CellView{
                         newLocation.x = min(newLocation.x,emptyCell.x)
                     }
                 }
-                self.location = newLocation
+                cellMarker.location = newLocation
             }.updating($startLocation) { (value, startLocation, transaction) in
-                startLocation = startLocation ?? location
+                startLocation = startLocation ?? cellMarker.location
             }
     }
     
@@ -99,13 +97,10 @@ struct BoardCell:CellView{
             .frame(width:CELL_WIDTH, height: CELL_HEIGHT)
             //.background(Rectangle().fill(ImagePaint(image: Image("wood1"), scale: 0.2)).shadow(radius: 0))
             .background(Rectangle().fill(ImagePaint(image: Image("wood1"), scale: 0.2)))
-            .position(location)
+            .position(cellMarker.location)
             .gesture(
                 simpleDrag
             )
-            .onChange(of:cellMarker.regenerateLocation){ value in
-                location = cellMarker.location
-            }
             .onDisappear(){
                 printAny("boardcell will disappear")
                 //self.cellMarker.printReferenceCount()
@@ -116,10 +111,7 @@ struct BoardCell:CellView{
         Rectangle()
             .fill(.blue)
             .frame(width:CELL_WIDTH, height: CELL_HEIGHT)
-            .position(location)
-            .onChange(of:cellMarker.regenerateLocation){ value in
-                location = cellMarker.location
-            }
+            .position(cellMarker.location)
             .onDisappear(){
                 printAny("boardcell will disappear")
                 //self.cellMarker.printReferenceCount()
@@ -128,8 +120,6 @@ struct BoardCell:CellView{
     
     init(cellMarker:BoardMarker){
         self.cellMarker = cellMarker
-        self.firstLocation = cellMarker.location
-        self.location = cellMarker.location
         dummy.name = self.cellMarker.id.uuidString
         printAny("################ INIT BOARDCELL ############################")
     }

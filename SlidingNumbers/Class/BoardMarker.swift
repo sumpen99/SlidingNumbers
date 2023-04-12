@@ -7,20 +7,12 @@
 import SwiftUI
 
 class BoardMarker:Identifiable,ObservableObject{
-    @Published var regenerateLocation : Bool = false
-    var id = UUID()
+    @Published var location = CGPoint(x:0,y:0)
+    var baseLocation = CGPoint(x:0,y:0)
+    let id = UUID()
     var index: Int
     var name:String
     var isEmpty: Bool
-    var _location: CGPoint = CGPoint(x:0,y:0)
-    var location: CGPoint {
-          get {
-            return _location
-          }
-          set (newVal) {
-            _location = newVal
-        }
-    }
     
     deinit{
         printAny("deinit boardmarker \(id)")
@@ -33,18 +25,14 @@ class BoardMarker:Identifiable,ObservableObject{
         updateLocation()
     }
     
-    func refresh(){
-        updateID()
-        updateLocation()
-    }
-    
-    func updateID(){
-        id = UUID()
-    }
-    
     func updateLocation(){
         let position = (x:Int(index%BOARDER_COLS),y:Int(index/BOARDER_COLS))
         self.location = getCellLocation(position:position)
+        self.baseLocation = getCellLocation(position:position)
+    }
+    
+    func resetLocationToBase(){
+        self.location = self.baseLocation
     }
     
     func printReferenceCount(){
