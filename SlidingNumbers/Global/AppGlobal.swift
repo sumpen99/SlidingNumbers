@@ -18,8 +18,10 @@ func addressHeap<T: AnyObject>(o: T) -> Int {
     return unsafeBitCast(o, to: Int.self)
 }*/
 
+let WOOD_IMAGE_PAINT = ImagePaint(image: Image("wood1"), scale: 0.2)
+
 let EMPTY_CELL_IDENTIFIER = "E"
-let DIFFICULT_LEVEL: Float = 0.5
+let DIFFICULT_LEVEL: Float = 0.9
 var BOARDER_WIDTH: CGFloat = 0.0
 var BOARDER_HEIGHT: CGFloat = 0.0
 var CELL_WIDTH: CGFloat = 0.0
@@ -40,6 +42,7 @@ func setCellSize(width:CGFloat,height:CGFloat){
 func getCellLocation(position:(x:Int,y:Int)) -> CGPoint{
     let baseX = CELL_WIDTH/2 + BOARDER_SIZE + (BOARDER_CELL_SPACE.width * CGFloat(position.x)) + 1
     let baseY = CELL_HEIGHT/2 + BOARDER_SIZE + (BOARDER_CELL_SPACE.height * CGFloat(position.y)) + 1
-    let baseLocation = CGPoint(x:(baseX + (CELL_WIDTH*CGFloat(position.x))),y:(baseY + (CELL_HEIGHT*CGFloat(position.y))))
-    return baseLocation
+    let posX = baseX + (CELL_WIDTH  * CGFloat(position.x))
+    let posY = baseY + (CELL_HEIGHT * CGFloat(position.y))
+    return CGPoint(x:posX,y:posY)
 }

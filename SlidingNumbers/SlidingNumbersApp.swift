@@ -11,7 +11,7 @@ import SwiftUI
 struct SlidingNumbersApp: App {
     var body: some Scene {
         WindowGroup {
-            NavigationView()
+            GameMenuView()
         }
     }
 }

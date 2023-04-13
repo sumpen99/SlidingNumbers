@@ -1,13 +1,13 @@
 //
-//  NavigationView.swift
+//  GameMenuView.swift
 //  SlidingNumbers
 //
-//  Created by fredrik sundström on 2023-04-01.
+//  Created by fredrik sundström on 2023-04-13.
 //
 
 import SwiftUI
 
-struct NavigationView: View{
+struct GameMenuView: View{
     
     @State private var showingSheet = false
   
@@ -48,13 +48,14 @@ struct NavigationView: View{
                 getButton(5)
                 getButton(6)
                 getButton(7)
+                //.sheet(isPresented: $showingSheet, content: BoardView.init)
                 .fullScreenCover(isPresented: $showingSheet, content: BoardView.init)
             }
             .padding(10)
             .frame(width: geometry.size.width,
                    height: geometry.size.height,
                    alignment: .center)
-            .background(Rectangle().fill(ImagePaint(image: Image("wood1"), scale: 0.2)).shadow(radius: 0))
+            .background(Rectangle().fill(WOOD_IMAGE_PAINT).shadow(radius: 0))
             //.position(x:geometry.size.width/2,y:geometry.size.height/2)
             //.border(ImagePaint(image: Image("wood4"), scale: 0.2), width: BOARDER_SIZE*2)
         }

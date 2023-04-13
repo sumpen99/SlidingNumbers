@@ -9,7 +9,6 @@ import SwiftUI
 struct BoardCell:CellView{
     @EnvironmentObject var boardModel:BoardModel
     @ObservedObject var cellMarker:BoardMarker
-  
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
     
@@ -94,8 +93,8 @@ struct BoardCell:CellView{
                     fixedSize: 34)
                 .weight(.semibold))
             .frame(width:CELL_WIDTH, height: CELL_HEIGHT)
-            //.background(Rectangle().fill(ImagePaint(image: Image("wood1"), scale: 0.2)).shadow(radius: 0))
-            .background(Rectangle().fill(ImagePaint(image: Image("wood1"), scale: 0.2)))
+            //.background(Rectangle().fill(ImagePaint(image: Image("wood1"), scale: 0.2)))
+            .background(WOOD_IMAGE_PAINT)
             .position(cellMarker.location)
             .gesture(
                 simpleDrag
