@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Combine
+
 struct SignupView : View {
     @State private var terms: Bool = false
     @State private var name: String = ""
