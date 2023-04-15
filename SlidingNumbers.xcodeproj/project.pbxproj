@@ -37,6 +37,10 @@
 		7D2191FD29EA9B7D007FEEA0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2191FC29EA9B7D007FEEA0 /* ContentView.swift */; };
 		7D21920629EAA928007FEEA0 /* AppScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21920529EAA928007FEEA0 /* AppScene.swift */; };
 		7D21921029EACDD9007FEEA0 /* RatioContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21920F29EACDD9007FEEA0 /* RatioContainer.swift */; };
+		7D21921229EADA69007FEEA0 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21921129EADA69007FEEA0 /* SignupView.swift */; };
+		7D21921429EADA9F007FEEA0 /* PasswordLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21921329EADA9F007FEEA0 /* PasswordLevel.swift */; };
+		7D21921629EADAD1007FEEA0 /* SecureLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21921529EADAD1007FEEA0 /* SecureLevelView.swift */; };
+		7D21921829EADB12007FEEA0 /* PasswordChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21921729EADB12007FEEA0 /* PasswordChecker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +88,10 @@
 		7D2191FC29EA9B7D007FEEA0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7D21920529EAA928007FEEA0 /* AppScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScene.swift; sourceTree = "<group>"; };
 		7D21920F29EACDD9007FEEA0 /* RatioContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioContainer.swift; sourceTree = "<group>"; };
+		7D21921129EADA69007FEEA0 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		7D21921329EADA9F007FEEA0 /* PasswordLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordLevel.swift; sourceTree = "<group>"; };
+		7D21921529EADAD1007FEEA0 /* SecureLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureLevelView.swift; sourceTree = "<group>"; };
+		7D21921729EADB12007FEEA0 /* PasswordChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChecker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +198,8 @@
 				7D2191DD29E8582F007FEEA0 /* GameMenuView.swift */,
 				7D2191F029E9C755007FEEA0 /* LoginView.swift */,
 				7D2191FC29EA9B7D007FEEA0 /* ContentView.swift */,
+				7D21921129EADA69007FEEA0 /* SignupView.swift */,
+				7D21921529EADAD1007FEEA0 /* SecureLevelView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -206,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				7D2191AB29DC69B0007FEEA0 /* Direction.swift */,
+				7D21921329EADA9F007FEEA0 /* PasswordLevel.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -258,6 +269,7 @@
 			children = (
 				7D2191BD29DF1CB3007FEEA0 /* BoardModel.swift */,
 				7D2191F629EA91EC007FEEA0 /* FirebaseAuth.swift */,
+				7D21921729EADB12007FEEA0 /* PasswordChecker.swift */,
 			);
 			path = Observable;
 			sourceTree = "<group>";
@@ -404,16 +416,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D21921229EADA69007FEEA0 /* SignupView.swift in Sources */,
 				7D2191F729EA91EC007FEEA0 /* FirebaseAuth.swift in Sources */,
 				7D2191A329D985CF007FEEA0 /* BoardView.swift in Sources */,
 				7D2191FD29EA9B7D007FEEA0 /* ContentView.swift in Sources */,
+				7D21921829EADB12007FEEA0 /* PasswordChecker.swift in Sources */,
 				7D21916629D839D4007FEEA0 /* SlidingNumbersApp.swift in Sources */,
+				7D21921429EADA9F007FEEA0 /* PasswordLevel.swift in Sources */,
 				7D2191D429E5BA6B007FEEA0 /* DeviceRotationViewModifier.swift in Sources */,
 				7D21920629EAA928007FEEA0 /* AppScene.swift in Sources */,
 				7D2191B129DC8FE2007FEEA0 /* AppExtensions.swift in Sources */,
 				7D21921029EACDD9007FEEA0 /* RatioContainer.swift in Sources */,
 				7D21919E29D85A20007FEEA0 /* BoardCell.swift in Sources */,
 				7D2191B529DE0C8C007FEEA0 /* CellView.swift in Sources */,
+				7D21921629EADAD1007FEEA0 /* SecureLevelView.swift in Sources */,
 				7D2191DE29E8582F007FEEA0 /* GameMenuView.swift in Sources */,
 				7D2191F129E9C755007FEEA0 /* LoginView.swift in Sources */,
 				7D2191A929DB4491007FEEA0 /* BoardMarker.swift in Sources */,

@@ -11,7 +11,7 @@ struct LoginView: View{
     @EnvironmentObject var firebaseAuth: FirebaseAuth
     @State var email = ""
     @State var password = ""
-    @State var showPassword: Bool = false
+    @State private var showingSignUpSheet = false
     let dummy = Dummy(name:"LoginView",printOnDestroy: true)
     
     var isSignInButtonDisabled: Bool {
@@ -28,7 +28,7 @@ struct LoginView: View{
                             .font(.largeTitle).foregroundColor(Color.white)
                             .padding([.top, .bottom], 40)
                         
-                        Image("iosapptemplate")
+                        Image("wood2")
                             .resizable()
                             .frame(width: 250, height: 250)
                             .clipShape(Circle())
@@ -55,7 +55,7 @@ struct LoginView: View{
                                     .cornerRadius(15.0)
                             }
                             Spacer()
-                            Button(action: {loginUser()}) {
+                            Button(action: {showingSignUpSheet.toggle()}) {
                                 Text("Dont have an account? Sign Up")
                                     .font(.headline)
                                     .foregroundColor(.white)
@@ -71,7 +71,7 @@ struct LoginView: View{
             .background(
               LinearGradient(gradient: Gradient(colors: [.purple, .blue]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all))
-            //.sheet(isPresented: <#T##Binding<Bool>#>, content: <#T##() -> View#>)
+            .sheet(isPresented: $showingSignUpSheet,content: SignupView.init)
         }
     }
     
