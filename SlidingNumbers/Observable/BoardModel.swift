@@ -30,15 +30,15 @@ class BoardModel: ObservableObject{
 
         DispatchQueue.global().async(execute: workItem)*/
         
-        /*for marker in self.boardMarkers{
+        for marker in self.boardMarkers{
             DispatchQueue.main.async {
                 marker.updateLocation()
             }
-        }*/
-        
-        for marker in self.boardMarkers{
-            marker.updateLocation()
         }
+        
+        /*for marker in self.boardMarkers{
+            marker.updateLocation()
+        }*/
     }
     
     func resetBoard(){

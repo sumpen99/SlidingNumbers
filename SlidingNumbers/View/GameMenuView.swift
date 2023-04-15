@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct GameMenuView: View{
-    
     @State private var showingSheet = false
   
     func setBoardRows(_ rows:Int){
@@ -29,7 +28,7 @@ struct GameMenuView: View{
     
     func getTextLabel(_ text:String) -> some View{
         return Text(text)
-            .font(.largeTitle.bold())
+            .font(.subheadline.bold())
             .frame(minWidth: 0, maxWidth: .infinity)
             .font(.system(size: 18))
             .padding()
@@ -41,23 +40,23 @@ struct GameMenuView: View{
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            VStack{
-                getButton(3)
-                getButton(4)
-                getButton(5)
-                getButton(6)
-                getButton(7)
-                //.sheet(isPresented: $showingSheet, content: BoardView.init)
-                .fullScreenCover(isPresented: $showingSheet, content: BoardView.init)
+        ZStack{
+            RatioContainer(widthRatio: 0.5){
+                ScrollView{
+                    VStack{
+                        getButton(3)
+                        getButton(4)
+                        getButton(5)
+                        getButton(6)
+                        getButton(7)
+                        //.sheet(isPresented: $showingSheet, content: BoardView.init)
+                            .fullScreenCover(isPresented: $showingSheet, content: BoardView.init)
+                    }
+                    .padding(10)
+                }
             }
-            .padding(10)
-            .frame(width: geometry.size.width,
-                   height: geometry.size.height,
-                   alignment: .center)
-            .background(Rectangle().fill(WOOD_IMAGE_PAINT).shadow(radius: 0))
-            //.position(x:geometry.size.width/2,y:geometry.size.height/2)
-            //.border(ImagePaint(image: Image("wood4"), scale: 0.2), width: BOARDER_SIZE*2)
         }
+        .background(Rectangle().fill(WOOD_IMAGE_PAINT).shadow(radius: 0).edgesIgnoringSafeArea(.all))
+            
     }
 }

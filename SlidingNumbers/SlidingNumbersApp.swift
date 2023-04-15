@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
-struct SlidingNumbersApp: App {
-    var body: some Scene {
-        WindowGroup {
-            GameMenuView()
-        }
+struct SlidingNumbersApp: App{
+    init(){
+        FirebaseApp.configure()
+    }
+    
+    var body:some Scene {
+        AppScene()
     }
 }

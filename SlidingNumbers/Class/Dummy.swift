@@ -7,8 +7,10 @@
 
 class Dummy{
     var name = ""
-    init(){
-        //printAny("init dummy")
+    var printOnDestroy = false
+    init(name:String = "",printOnDestroy:Bool = false){
+        self.name = name
+        self.printOnDestroy = printOnDestroy
     }
     
     func printTest(){
@@ -16,6 +18,8 @@ class Dummy{
     }
     
     deinit{
-        //printAny("deinit dummy name: \(name)")
+        if printOnDestroy{
+            printAny("deinit dummy name: \(name)")
+        }
     }
 }
