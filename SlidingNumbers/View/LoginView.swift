@@ -41,8 +41,11 @@ struct LoginView: View{
                                 .background(.white)
                                 .cornerRadius(20.0)
                             
-                            SecureField("Password", text: self.$password)
+                            /*SecureField("Password", text: self.$password)
                                 .padding()
+                                .background(.white)
+                                .cornerRadius(20.0)*/
+                            CustomSecureField(text: self.$password)
                                 .background(.white)
                                 .cornerRadius(20.0)
                             Button(action: {loginUser()}) {

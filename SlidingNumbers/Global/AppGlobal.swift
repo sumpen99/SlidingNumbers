@@ -18,6 +18,8 @@ func addressHeap<T: AnyObject>(o: T) -> Int {
     return unsafeBitCast(o, to: Int.self)
 }*/
 
+let MIN_PASSWORD_LEN = 5
+
 let WOOD_IMAGE_PAINT = ImagePaint(image: Image("wood1"), scale: 0.2)
 
 let EMPTY_CELL_IDENTIFIER = "E"

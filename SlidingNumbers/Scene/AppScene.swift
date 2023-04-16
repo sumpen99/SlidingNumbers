@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+
 struct AppScene: Scene {
     @Environment(\.scenePhase) private var phase
     @StateObject var firebaseAuth = FirebaseAuth()

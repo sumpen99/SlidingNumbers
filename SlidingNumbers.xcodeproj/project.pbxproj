@@ -41,6 +41,10 @@
 		7D21921429EADA9F007FEEA0 /* PasswordLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21921329EADA9F007FEEA0 /* PasswordLevel.swift */; };
 		7D21921629EADAD1007FEEA0 /* SecureLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21921529EADAD1007FEEA0 /* SecureLevelView.swift */; };
 		7D21921829EADB12007FEEA0 /* PasswordChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21921729EADB12007FEEA0 /* PasswordChecker.swift */; };
+		7D21921A29EBCD07007FEEA0 /* ToggleVisiblePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21921929EBCD07007FEEA0 /* ToggleVisiblePasswordView.swift */; };
+		7D21921E29EBF386007FEEA0 /* CustomSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21921D29EBF386007FEEA0 /* CustomSecureField.swift */; };
+		7D21922029EBF869007FEEA0 /* LoginModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21921F29EBF869007FEEA0 /* LoginModifier.swift */; };
+		7D21922229EBF98E007FEEA0 /* CustomSecureField1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21922129EBF98E007FEEA0 /* CustomSecureField1.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +96,11 @@
 		7D21921329EADA9F007FEEA0 /* PasswordLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordLevel.swift; sourceTree = "<group>"; };
 		7D21921529EADAD1007FEEA0 /* SecureLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureLevelView.swift; sourceTree = "<group>"; };
 		7D21921729EADB12007FEEA0 /* PasswordChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChecker.swift; sourceTree = "<group>"; };
+		7D21921929EBCD07007FEEA0 /* ToggleVisiblePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleVisiblePasswordView.swift; sourceTree = "<group>"; };
+		7D21921D29EBF386007FEEA0 /* CustomSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField.swift; sourceTree = "<group>"; };
+		7D21921F29EBF869007FEEA0 /* LoginModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModifier.swift; sourceTree = "<group>"; };
+		7D21922129EBF98E007FEEA0 /* CustomSecureField1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField1.swift; sourceTree = "<group>"; };
+		7D21922329EC0A23007FEEA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +157,7 @@
 		7D21916429D839D4007FEEA0 /* SlidingNumbers */ = {
 			isa = PBXGroup;
 			children = (
+				7D21922329EC0A23007FEEA0 /* Info.plist */,
 				7D21920C29EAB8FF007FEEA0 /* Observable */,
 				7D21920B29EAB8AE007FEEA0 /* Protocol */,
 				7D21920A29EAB894007FEEA0 /* ViewModifier */,
@@ -251,6 +261,10 @@
 			children = (
 				7D2191D329E5BA6B007FEEA0 /* DeviceRotationViewModifier.swift */,
 				7D21920F29EACDD9007FEEA0 /* RatioContainer.swift */,
+				7D21921929EBCD07007FEEA0 /* ToggleVisiblePasswordView.swift */,
+				7D21921D29EBF386007FEEA0 /* CustomSecureField.swift */,
+				7D21921F29EBF869007FEEA0 /* LoginModifier.swift */,
+				7D21922129EBF98E007FEEA0 /* CustomSecureField1.swift */,
 			);
 			path = ViewModifier;
 			sourceTree = "<group>";
@@ -416,6 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D21922229EBF98E007FEEA0 /* CustomSecureField1.swift in Sources */,
 				7D21921229EADA69007FEEA0 /* SignupView.swift in Sources */,
 				7D2191F729EA91EC007FEEA0 /* FirebaseAuth.swift in Sources */,
 				7D2191A329D985CF007FEEA0 /* BoardView.swift in Sources */,
@@ -423,6 +438,8 @@
 				7D21921829EADB12007FEEA0 /* PasswordChecker.swift in Sources */,
 				7D21916629D839D4007FEEA0 /* SlidingNumbersApp.swift in Sources */,
 				7D21921429EADA9F007FEEA0 /* PasswordLevel.swift in Sources */,
+				7D21922029EBF869007FEEA0 /* LoginModifier.swift in Sources */,
+				7D21921A29EBCD07007FEEA0 /* ToggleVisiblePasswordView.swift in Sources */,
 				7D2191D429E5BA6B007FEEA0 /* DeviceRotationViewModifier.swift in Sources */,
 				7D21920629EAA928007FEEA0 /* AppScene.swift in Sources */,
 				7D2191B129DC8FE2007FEEA0 /* AppExtensions.swift in Sources */,
@@ -436,6 +453,7 @@
 				7D21919629D83D77007FEEA0 /* AppGlobal.swift in Sources */,
 				7D2191B829DE1811007FEEA0 /* Dummy.swift in Sources */,
 				7D2191BE29DF1CB3007FEEA0 /* BoardModel.swift in Sources */,
+				7D21921E29EBF386007FEEA0 /* CustomSecureField.swift in Sources */,
 				7D2191F929EA9414007FEEA0 /* OptionalView.swift in Sources */,
 				7D2191AC29DC69B0007FEEA0 /* Direction.swift in Sources */,
 			);
@@ -599,7 +617,7 @@
 				DEVELOPMENT_TEAM = 46XS2RD832;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = SlidingNumbers/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
@@ -628,7 +646,7 @@
 				DEVELOPMENT_TEAM = 46XS2RD832;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = SlidingNumbers/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
