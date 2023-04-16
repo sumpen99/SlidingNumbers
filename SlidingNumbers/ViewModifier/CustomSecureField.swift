@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CustomSecureField: View {
 
+    var label:String = "Password"
     @FocusState var focus1: Bool
     @FocusState var focus2: Bool
     @State var showPassword: Bool = false
@@ -17,18 +18,17 @@ struct CustomSecureField: View {
     var body: some View {
         HStack() {
             ZStack(alignment: .trailing) {
-                TextField("Password", text: $text)
+                TextField(label, text: $text)
                     .modifier(LoginModifier())
                     .textContentType(.password)
                     .focused($focus1)
                     .opacity(showPassword ? 1 : 0)
                     
-                SecureField("Password", text: $text)
+                SecureField(label, text: $text)
                     .modifier(LoginModifier())
                     .textContentType(.password)
                     .focused($focus2)
                     .opacity(showPassword ? 0 : 1)
-                
             }
             Image(systemName: showPassword ? "eye" : "eye.slash").onTapGesture {
                 showPassword.toggle()

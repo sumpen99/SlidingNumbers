@@ -19,7 +19,8 @@ struct ToggleVisiblePasswordView : View {
         CustomSecureField1(text: $passwordChecker.password)
         .overlay {
             RoundedRectangle(cornerRadius: 10)
-                .stroke(.red, lineWidth: 2)
+                .stroke(Color(UIColor.opaqueSeparator), lineWidth: 2)
         }
+        
     }
 }

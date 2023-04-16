@@ -17,29 +17,32 @@ struct Constants {
 
 class PasswordChecker: ObservableObject {
     @Published public var didChange = false
+    @Published var confirmedPassword: String = ""
+
     let constants = Constants.validChars
-    private var _password: String = ""
-    
+   
     var password: String = "" {
         didSet {
             self.checkForPassword(password:self.password)
         }
     }
     
+        
     var level: PasswordLevel = .none {
         didSet {
             self.didChange.toggle()
         }
     }
     
+    var passwordsIsAMatch : Bool { return self.level.rawValue >= 2 && password == confirmedPassword}
+    
     func checkForPassword(password:String) {
         let numOfSpecialChars = password.filter{ !self.constants.contains($0) && $0 != "●"}.count
-        printAny(numOfSpecialChars)
         if password.count < MIN_PASSWORD_LEN{
             self.level = .none
         } else if numOfSpecialChars == 0 {
             self.level = .weak
-        } else if numOfSpecialChars <= 2 {
+        } else if numOfSpecialChars == 1 {
             self.level = .ok
         } else {
             self.level = .strong

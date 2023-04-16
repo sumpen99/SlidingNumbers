@@ -8,27 +8,17 @@
 import SwiftUI
 
 struct SignupView : View {
-    @State private var terms: Bool = false
+    @EnvironmentObject var firebaseAuth: FirebaseAuth
     @State private var name: String = ""
     @State private var email: String = ""
     @ObservedObject var passwordChecker: PasswordChecker = PasswordChecker()
-    
-    private enum Field: Int {
-        case textEditName
-        case textEditEmail
-        case textEditPassword
-    }
-
-    @FocusState private var focusedField: Field?
-
+   
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Your Info")) {
                     TextField("Name",text: $name)
-                        .focused($focusedField, equals: .textEditName)
                     TextField("Email",text: $email)
-                        .focused($focusedField, equals: .textEditEmail)
                 }
                 Section(header: Text("Password"),footer: Text("It must be at least \(MIN_PASSWORD_LEN) characters in length \nand contain at least one special character")) {
                     ToggleVisiblePasswordView()
@@ -36,16 +26,22 @@ struct SignupView : View {
                 }
                 Section {
                     if self.passwordChecker.level.rawValue >= 2 {
-                        Toggle(isOn: $terms) {
-                            Text("Accept the terms and conditions")
+                        CustomSecureField1(text: $passwordChecker.confirmedPassword)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(passwordChecker.passwordsIsAMatch ? .green : .red, lineWidth: 2)
                         }
-                        if self.terms {
-                            Button(action: {
-                                print("register account")
-                            }) {
-                                Text("OK")
+                        if passwordChecker.passwordsIsAMatch{
+                            Button(action: { signUserUp()}) {
+                                Text("Sign Up")
                             }
                         }
+                        else{
+                            Text("Password is not a match")
+                                .foregroundColor(.gray)
+                                .font(.headline)
+                        }
+                        
                     }
                 }
             }
@@ -55,22 +51,13 @@ struct SignupView : View {
                 .edgesIgnoringSafeArea(.all))
             .navigationBarTitle(Text("Registration Form"))
         }
-        /*.onTapGesture {
-            if (focusedField != nil) {
-                focusedField = nil
-            }
-        }*/
-        /*.onTapGesture {
-            // Hide Keyboard
-            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        }
-        .gesture(
-            DragGesture(minimumDistance: 0, coordinateSpace: .local).onEnded({ gesture in
-                // Hide keyboard on swipe down
-                if gesture.translation.height > 0 {
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                }
-        }))*/
+    }
+    
+    func signUserUp(){
+        printAny(firebaseAuth.isLoggedIn)
+        printAny("\(passwordChecker.password) " +
+                 "\(passwordChecker.confirmedPassword) " +
+                 "\(passwordChecker.passwordsIsAMatch) ")
     }
 }
 

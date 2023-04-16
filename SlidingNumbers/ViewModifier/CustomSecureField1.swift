@@ -10,7 +10,8 @@ import SwiftUI
 struct CustomSecureField1 : View {
     @Binding var text : String
     @State var isEditing = false
-    @State var showPassword = true
+    @State var showPassword = false
+    var label:String = "Password"
     var body : some View {
         let showPasswordBinding = Binding<String> {
             self.text
@@ -30,12 +31,13 @@ struct CustomSecureField1 : View {
         return ZStack(alignment: .trailing) {
             HStack{
                 TextField(
-                    "Password",
+                    label,
                     text: showPassword ? showPasswordBinding : hidePasswordBinding,
                     onEditingChanged: { editingChanged in
                         isEditing = editingChanged
                     }
                 )
+                .textContentType(.password)
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
                 Image(systemName: showPassword ? "eye" : "eye.slash").onTapGesture {

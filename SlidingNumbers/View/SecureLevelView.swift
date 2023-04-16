@@ -24,9 +24,9 @@ struct SecureLevelView : View {
         case .weak:
             return [.red, .clear, .clear]
         case .ok:
-            return [.red, .orange, .clear]
+            return [.clear, .orange, .clear]
         case .strong:
-            return [.red, .orange, .green]
+            return [.clear, .clear, .green]
         }
     }
 }

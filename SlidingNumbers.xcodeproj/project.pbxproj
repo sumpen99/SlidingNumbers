@@ -45,6 +45,7 @@
 		7D21921E29EBF386007FEEA0 /* CustomSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21921D29EBF386007FEEA0 /* CustomSecureField.swift */; };
 		7D21922029EBF869007FEEA0 /* LoginModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21921F29EBF869007FEEA0 /* LoginModifier.swift */; };
 		7D21922229EBF98E007FEEA0 /* CustomSecureField1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21922129EBF98E007FEEA0 /* CustomSecureField1.swift */; };
+		7D21922529EC2D79007FEEA0 /* TextfieldLimitModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21922429EC2D79007FEEA0 /* TextfieldLimitModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		7D21921F29EBF869007FEEA0 /* LoginModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModifier.swift; sourceTree = "<group>"; };
 		7D21922129EBF98E007FEEA0 /* CustomSecureField1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField1.swift; sourceTree = "<group>"; };
 		7D21922329EC0A23007FEEA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7D21922429EC2D79007FEEA0 /* TextfieldLimitModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldLimitModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +267,7 @@
 				7D21921D29EBF386007FEEA0 /* CustomSecureField.swift */,
 				7D21921F29EBF869007FEEA0 /* LoginModifier.swift */,
 				7D21922129EBF98E007FEEA0 /* CustomSecureField1.swift */,
+				7D21922429EC2D79007FEEA0 /* TextfieldLimitModifier.swift */,
 			);
 			path = ViewModifier;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				7D2191DE29E8582F007FEEA0 /* GameMenuView.swift in Sources */,
 				7D2191F129E9C755007FEEA0 /* LoginView.swift in Sources */,
 				7D2191A929DB4491007FEEA0 /* BoardMarker.swift in Sources */,
+				7D21922529EC2D79007FEEA0 /* TextfieldLimitModifier.swift in Sources */,
 				7D21919629D83D77007FEEA0 /* AppGlobal.swift in Sources */,
 				7D2191B829DE1811007FEEA0 /* Dummy.swift in Sources */,
 				7D2191BE29DF1CB3007FEEA0 /* BoardModel.swift in Sources */,
